@@ -28,6 +28,7 @@ namespace todo_rest_api
         {
 
             services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "todo_rest_api", Version = "v1" });
@@ -43,8 +44,10 @@ namespace todo_rest_api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "todo_rest_api v1"));
             }
-
-            app.UseHttpsRedirection();
+            else
+            {    
+                app.UseHttpsRedirection();
+            }
 
             app.UseRouting();
 

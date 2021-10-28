@@ -2,11 +2,12 @@ using System.Collections.Generic;
 
 namespace todo_rest_api.Models
 {
-    class RepositoryTodoListModel
+    public class RepositoryTodoItem
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<TodoItemList> generalList = new List<TodoItemList>();
+        public int LastTaskId{ get; set; }
+        public List<TodoItem> tasks = new List<TodoItem>();
 
     }
 }

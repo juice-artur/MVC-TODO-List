@@ -94,7 +94,7 @@ namespace todo_rest_api.Controllers
 
 
         [HttpDelete("task")]
-        public ActionResult<Task> DeleteTaskById(int listId, int taskId)
+        public ActionResult<TodoItem> DeleteTaskById(int listId, int taskId)
         {
             todoItemService.DeleteTodoItem(listId, taskId);
 

@@ -5,8 +5,6 @@ namespace todo_rest_api.Models
 {
     public class TodoItemList : ITodoItemRepository
     {
-        private List<TodoItem> generalTodoItems = new List<TodoItem>();
-
         private List<TodoItem> todoItems = new List<TodoItem> { new TodoItem() { Id = 1, Title = "Implement read" } };
         private int lastId = 1;
 

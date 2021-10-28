@@ -30,6 +30,20 @@ namespace todo_rest_api.Controllers
             return _todoItemRepository.GetAll();
         }
 
+        [HttpPut("{id}")]
+        public ActionResult<TodoItem> RewriteTodoItem(TodoItem todoItem, int id)
+        {
+            return _todoItemRepository.Rewrite(todoItem, id);
+        }
+        [HttpPatch("{id}")]
+        public ActionResult<TodoItem> UpdateTodoItem(TodoItem item, int id)
+        {
+            return _todoItemRepository.Update(item, id);
+        }
+
+
+
+
         [HttpPost("")]
         public ActionResult<TodoItem> CreateTodoItem(TodoItem todoItem)
         {

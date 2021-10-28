@@ -40,21 +40,52 @@ namespace todo_rest_api.Models
             todoItems.RemoveAll(i => i.Id == id);
         }
 
-        public bool Update(TodoItem item)
+        public TodoItem Rewrite(TodoItem item, int id)
         {
+
             if (item == null)
             {
                 throw new ArgumentNullException("item");
             }
 
-            int index = todoItems.FindIndex(p => p.Id == item.Id);
+            int index = todoItems.FindIndex(p => p.Id == id);
             if (index == -1)
             {
-                return false;
+                throw new ArgumentNullException("item");
             }
+            item.Id = id;
             todoItems.RemoveAt(index);
             todoItems.Add(item);
-            return true;
+            return item;
+        }
+
+
+        public TodoItem Update(TodoItem item, int id)
+        {
+            int index = todoItems.FindIndex(p => p.Id == id);
+            if (item == null)
+            {
+                if (index != -1)
+                {
+                    return todoItems[index];
+                }
+                throw new ArgumentNullException("item");
+            }
+
+            item.Id = id;
+            if (item.DueDate != DateTime.Now && item.DueDate != todoItems[index].DueDate)
+            {
+                todoItems[index].DueDate = item.DueDate;
+            }
+            if (item.Title != "string" && item.Title != todoItems[index].Title)
+            {
+                todoItems[index].Title = item.Title;
+            }
+            if (item.Description != "string" && item.Description  != todoItems[index].Description )
+            {
+                todoItems[index].Description  = item.Description ;
+            };
+            return todoItems[index];
         }
     }
 }

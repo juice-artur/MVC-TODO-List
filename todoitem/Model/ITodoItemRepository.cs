@@ -8,6 +8,8 @@ namespace todo_rest_api.Models
         TodoItem Get(int id);
         TodoItem Add(TodoItem item);
         void Remove(int id);
-        bool Update(TodoItem item);
+        TodoItem Rewrite(TodoItem item, int id);
+        TodoItem Update(TodoItem item, int id);
+
     }
 }

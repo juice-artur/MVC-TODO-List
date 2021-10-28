@@ -5,8 +5,8 @@ namespace todo_rest_api.Models
 {
     public class TodoItemRepository : ITodoItemRepository
     {
-        private List<TodoItem> todoItems = new List<TodoItem>();
-        private int lastId = 0;
+        private List<TodoItem> todoItems = new List<TodoItem> { new TodoItem() { Id = 1, Title = "Implement read" } };
+        private int lastId = 1;
 
         public TodoItemRepository()
         {
@@ -30,7 +30,7 @@ namespace todo_rest_api.Models
             return todoItems.Find(i => i.Id == id);
         }
 
-        public IEnumerable<TodoItem> GetAll()
+        public List<TodoItem> GetAll()
         {
             return todoItems;
         }
@@ -52,8 +52,8 @@ namespace todo_rest_api.Models
             {
                 return false;
             }
-             todoItems.RemoveAt(index);
-             todoItems.Add(item);
+            todoItems.RemoveAt(index);
+            todoItems.Add(item);
             return true;
         }
     }

@@ -4,7 +4,7 @@ namespace todo_rest_api.Models
 {
     public interface ITodoItemRepository
     {
-        IEnumerable<TodoItem> GetAll();  
+        List<TodoItem> GetAll();  
         TodoItem Get(int id);
         TodoItem Add(TodoItem item);
         void Remove(int id);

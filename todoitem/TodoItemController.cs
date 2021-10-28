@@ -11,23 +11,29 @@ namespace todo_rest_api.Controllers
     [ApiController]
     public class TodoItemController : ControllerBase
     {
-        private TodoItemService todoItemService;
+        private TodoItemRepository _todoItemRepository;
 
-        public TodoItemController(TodoItemService todoItemService)
+        public TodoItemController(TodoItemRepository todoItemRepository)
         {
-            this.todoItemService = todoItemService;
+            _todoItemRepository = todoItemRepository;
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<TodoItem> GetTodoItems(int id)
+        {
+            return _todoItemRepository.Get(id);
         }
 
         [HttpGet("")]
-        public ActionResult<IEnumerable<TodoItem>> GetTodoItems()
+        public ActionResult<IEnumerable<TodoItem>> GetAll()
         {
-            return todoItemService.GetAll();
+            return _todoItemRepository.GetAll();
         }
 
         [HttpPost("")]
         public ActionResult<TodoItem> CreateTodoItem(TodoItem todoItem)
         {
-            TodoItem createdItem = todoItemService.Create(todoItem);
+            TodoItem createdItem = _todoItemRepository.Add(todoItem);
             return Created($"api/todoitem/{createdItem.Id}", createdItem);
         }
 

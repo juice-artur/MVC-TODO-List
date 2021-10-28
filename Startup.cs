@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using todo_rest_api.Models;
 
 namespace todo_rest_api
 {
@@ -28,7 +29,7 @@ namespace todo_rest_api
         {
 
             services.AddControllers();
-            services.AddSingleton<TodoItemService>();
+            services.AddSingleton<TodoItemRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "todo_rest_api", Version = "v1" });

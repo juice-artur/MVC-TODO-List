@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace todo_rest_api.Models
 {
-    public class TodoItemRepository : ITodoItemRepository
+    public class TodoItemList : ITodoItemRepository
     {
+        private List<TodoItem> generalTodoItems = new List<TodoItem>();
+
         private List<TodoItem> todoItems = new List<TodoItem> { new TodoItem() { Id = 1, Title = "Implement read" } };
         private int lastId = 1;
 
-        public TodoItemRepository()
-        {
-
-        }
         public TodoItem Add(TodoItem item)
         {
             if (item == null)
@@ -20,7 +18,6 @@ namespace todo_rest_api.Models
             }
 
             item.Id = ++lastId;
-            //item.Description =
             todoItems.Add(item);
             return item;
         }

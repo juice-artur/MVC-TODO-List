@@ -11,9 +11,9 @@ namespace todo_rest_api.Controllers
     [ApiController]
     public class TodoItemController : ControllerBase
     {
-        private TodoItemRepository _todoItemRepository;
+        private TodoItemList _todoItemRepository;
 
-        public TodoItemController(TodoItemRepository todoItemRepository)
+        public TodoItemController(TodoItemList todoItemRepository)
         {
             _todoItemRepository = todoItemRepository;
         }

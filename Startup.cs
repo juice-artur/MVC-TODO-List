@@ -29,7 +29,7 @@ namespace todo_rest_api
         {
 
             services.AddControllers();
-            services.AddSingleton<TodoItemRepository>();
+            services.AddSingleton<TodoItemList>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "todo_rest_api", Version = "v1" });

@@ -52,7 +52,13 @@ namespace todo_rest_api.Models
         {
             foreach (var repo in todoRepo)
             {
-                return repo.Tasks.Find(item => item.Id == id);
+                foreach (var task in repo.Tasks)
+                {
+                    if (task.Id == id)
+                    {
+                        return task;
+                    }
+                }
             }
 
             throw new ArgumentException ("Not find argument");
@@ -87,16 +93,16 @@ namespace todo_rest_api.Models
             listForAddTask.Tasks.Add(item);
         }
 
-        public void PutTodoItem(int Id, TodoItem task)
+        public void PutTodoItem(int id, TodoItem task)
         {
             foreach (var repo in todoRepo)
             {
                 for (var i = 0; i < repo.Tasks.Count;  ++i)
                 {
-                    if (repo.Tasks[i].Id == Id)
+                    if (repo.Tasks[i].Id == id)
                     {
                         repo.Tasks[i] = task;
-                        repo.Tasks[i].Id = Id;
+                        repo.Tasks[i].Id = id;
                         return;
                     }
                 }

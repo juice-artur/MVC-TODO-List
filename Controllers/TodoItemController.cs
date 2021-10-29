@@ -42,7 +42,7 @@ namespace todo_rest_api.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult PutTask(int listId, int id, TodoItem task)
+        public IActionResult PutTask(int id, TodoItem task)
         {
            _todoItemService.PutTodoItem(id, task);
 
@@ -50,7 +50,7 @@ namespace todo_rest_api.Controllers
         }
 
 
-        [HttpPatch("{listId}/{id}")]
+        [HttpPatch("{id}")]
         public IActionResult PatchTask(int id, TodoItem task)
         {
             _todoItemService.PatchTodoItem(id, task);
@@ -59,7 +59,7 @@ namespace todo_rest_api.Controllers
         }
 
 
-        [HttpDelete("{listId}/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult<TodoItem> DeleteTask(int id)
         {
             _todoItemService.DeleteTodoItem(id);

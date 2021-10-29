@@ -4,14 +4,14 @@ namespace todo_rest_api.Models
 {
     public  class RepositoryTodoItem
     {
-        public RepositoryTodoItem()
-        {
-            LastTaskId = ++LastTaskId;
-        }
+
         public int Id { get; set; }
         public string Title { get; set; }
-        public static int LastTaskId{ get; set; }
-        public List<TodoItem> tasks = new List<TodoItem>();
+        public static int LastTaskId = 0;
+        
+  
+
+        public List<TodoItem> Tasks = new List<TodoItem>();
 
     }
 }

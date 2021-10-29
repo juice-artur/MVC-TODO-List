@@ -11,7 +11,7 @@ namespace todo_rest_api.Controllers
     [ApiController]
     public class TodoItemController : ControllerBase
     {
-        private TodoItemListService _todoItemService;
+        private readonly TodoItemListService _todoItemService;
         public TodoItemController(TodoItemListService service)
         {
             _todoItemService = service;
@@ -25,7 +25,7 @@ namespace todo_rest_api.Controllers
         }
 
 
-        [HttpGet("{listId}/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<TodoItem> GetTask(int id)
         {
             return _todoItemService.GetTask(id);
@@ -41,10 +41,10 @@ namespace todo_rest_api.Controllers
         }
 
 
-        [HttpPut("{listId}/{id}")]
+        [HttpPut("{id}")]
         public IActionResult PutTask(int listId, int id, TodoItem task)
         {
-           _todoItemService.PutTodoItem(listId, id, task);
+           _todoItemService.PutTodoItem(id, task);
 
             return Ok();
         }

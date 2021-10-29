@@ -78,7 +78,7 @@ namespace todo_rest_api.Controllers
         [HttpPut("task")]
         public IActionResult PutTask(int listId, int taskId, TodoItem task)
         {
-            todoItemService.PutTodoItem(listId, taskId, task);
+            todoItemService.PutTodoItem(taskId, task);
 
             return Ok();
         }

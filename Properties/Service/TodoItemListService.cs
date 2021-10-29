@@ -9,15 +9,15 @@ namespace todo_rest_api.Models
         private List<RepositoryTodoItem> todoRepo = new List<RepositoryTodoItem>    {
                 new RepositoryTodoItem() {
                     Id = 1, Title = "First",
-                    tasks = new List<TodoItem>()
+                    Tasks = new List<TodoItem>()
                         {
-                           new TodoItem() {Id = RepositoryTodoItem.LastTaskId, Title = "Task 1, List 1"},
+                           new TodoItem() {Id = ++RepositoryTodoItem.LastTaskId, Title = "Task 1, List 1"},
                         }},
                 new RepositoryTodoItem() {
                     Id = 2, Title = "Second",
-                    tasks = new List<TodoItem>()
+                    Tasks = new List<TodoItem>()
                         {
-                           new TodoItem() {Id =  RepositoryTodoItem.LastTaskId, Title = "Task 1, List 2"},
+                           new TodoItem() {Id =  ++RepositoryTodoItem.LastTaskId, Title = "Task 1, List 2"},
                         }}
             };
         private int _lastId = 2;
@@ -52,7 +52,7 @@ namespace todo_rest_api.Models
         {
             foreach (var repo in todoRepo)
             {
-                return repo.tasks.Find(item => item.Id == id);
+                return repo.Tasks.Find(item => item.Id == id);
             }
 
             throw new ArgumentException ("Not find argument");
@@ -63,7 +63,7 @@ namespace todo_rest_api.Models
             Dictionary<string, List<TodoItem>> tasks = new Dictionary<string, List<TodoItem>>();
             foreach (var todo in todoRepo)
             {
-                foreach (var task in todo.tasks)
+                foreach (var task in todo.Tasks)
                 {
                     if(tasks.ContainsKey(todo.Title))
                     {
@@ -83,22 +83,25 @@ namespace todo_rest_api.Models
         public void CreateTaskInRepository(int listId, TodoItem item)
         {
             var listForAddTask = GetTodoRepository(listId);
-            item.Id = RepositoryTodoItem.LastTaskId;
-            listForAddTask.tasks.Add(item);
+            item.Id = ++RepositoryTodoItem.LastTaskId;
+            listForAddTask.Tasks.Add(item);
         }
 
-        public void PutTodoItem(int listId, int id, TodoItem task)
+        public void PutTodoItem(int Id, TodoItem task)
         {
-            var currentTodoList = GetTodoRepository(listId);
-
-            for (int j = 0; j < currentTodoList.tasks.Count; ++j)
+            foreach (var repo in todoRepo)
             {
-                if (currentTodoList.tasks[j].Id == id)
+                for (var i = 0; i < repo.Tasks.Count;  ++i)
                 {
-                    task.Id = id;
-                    currentTodoList.tasks[j] = task;
-                    break;
+                    if (repo.Tasks[i].Id == Id)
+                    {
+                        repo.Tasks[i] = task;
+                        repo.Tasks[i].Id = Id;
+                        return;
+                    }
                 }
+
+                throw new ArgumentException("Isnt args");
             }
         }
         public void  PatchTodoItem(int taskId, TodoItem task)
@@ -115,7 +118,7 @@ namespace todo_rest_api.Models
         {
             foreach (var repo in todoRepo)
             {
-                repo.tasks.RemoveAll(item => item.Id == id);
+                repo.Tasks.RemoveAll(item => item.Id == id);
             }
         }
 

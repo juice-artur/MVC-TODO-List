@@ -10,12 +10,12 @@ namespace todo_rest_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TodoListTaskController : ControllerBase
+    public class TodoRepositoryController : ControllerBase
     {
         private TodoItemListService todoItemService;
 
 
-        public TodoListTaskController(TodoItemListService service)
+        public TodoRepositoryController(TodoItemListService service)
         {
             this.todoItemService = service;
         }

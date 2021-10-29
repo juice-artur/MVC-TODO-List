@@ -75,11 +75,6 @@ namespace todo_rest_api.Models
             return tasks;
         }
 
-        public List<TodoItem> GetTasksByListId(int listId)
-        {
-            return todoItems.Find(x => x.Id == listId).tasks;
-        }
-        ///
 
         public void CreateTaskInRepository(int listId, TodoItem item)
         {

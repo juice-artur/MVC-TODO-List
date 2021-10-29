@@ -1,62 +1,67 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace todo_rest_api.Models
 {
     public class TodoItemListService
     {
-        private List<RepositoryTodoItem> todoItems = new List<RepositoryTodoItem>    {
+        private List<RepositoryTodoItem> todoRepo = new List<RepositoryTodoItem>    {
                 new RepositoryTodoItem() {
-                    Id = 1, Title = "First", LastTaskId = 1,
+                    Id = 1, Title = "First",
                     tasks = new List<TodoItem>()
                         {
-                           new TodoItem() {Id = 1, Title = "Task 1, List 1"},
+                           new TodoItem() {Id = RepositoryTodoItem.LastTaskId, Title = "Task 1, List 1"},
                         }},
                 new RepositoryTodoItem() {
-                    Id = 2, Title = "Second", LastTaskId = 1,
+                    Id = 2, Title = "Second",
                     tasks = new List<TodoItem>()
                         {
-                           new TodoItem() {Id = 1, Title = "Task 1, List 2"},
+                           new TodoItem() {Id =  RepositoryTodoItem.LastTaskId, Title = "Task 1, List 2"},
                         }}
             };
-        private int lastId = 2;
-        public RepositoryTodoItem AddTodoItem(RepositoryTodoItem repository)
+        private int _lastId = 2;
+        public RepositoryTodoItem AddRepository(RepositoryTodoItem repository)
         {
             if (repository == null)
             {
                 throw new ArgumentNullException("item");
             }
 
-            repository.Id = ++lastId;
-            todoItems.Add(repository);
+            repository.Id = ++_lastId;
+            todoRepo.Add(repository);
             return repository;
         }
 
         public RepositoryTodoItem GetTodoRepository(int id)
         {
-            return todoItems.Find(i => i.Id == id);
+            return todoRepo.Find(i => i.Id == id);
         }
 
-        public List<RepositoryTodoItem> GetAllRepositori()
+        public List<RepositoryTodoItem> GetAllRepository()
         {
-            return todoItems;
+            return todoRepo;
         }
-        public void Remove(int id)
+        public void RemoveRepo(int id)
         {
-            todoItems.RemoveAll(i => i.Id == id);
+            todoRepo.RemoveAll(i => i.Id == id);
         }
 
 
-        public TodoItem GetTask(int listId, int id)
+        public TodoItem GetTask(int id)
         {
-            List<TodoItem> tasks = GetTodoRepository(listId).tasks;
+            foreach (var repo in todoRepo)
+            {
+                return repo.tasks.Find(item => item.Id == id);
+            }
 
-            return tasks.Find(x => x.Id == id);
+            throw new ArgumentException ("Not find argument");
+
         }
         public Dictionary<string, List<TodoItem>> GetTasks()
         {
             Dictionary<string, List<TodoItem>> tasks = new Dictionary<string, List<TodoItem>>();
-            foreach (var todo in todoItems)
+            foreach (var todo in todoRepo)
             {
                 foreach (var task in todo.tasks)
                 {
@@ -74,15 +79,13 @@ namespace todo_rest_api.Models
 
             return tasks;
         }
-
-
+        
         public void CreateTaskInRepository(int listId, TodoItem item)
         {
             var listForAddTask = GetTodoRepository(listId);
-            item.Id = ++listForAddTask.LastTaskId;
+            item.Id = RepositoryTodoItem.LastTaskId;
             listForAddTask.tasks.Add(item);
         }
-        ////
 
         public void PutTodoItem(int listId, int id, TodoItem task)
         {
@@ -98,10 +101,9 @@ namespace todo_rest_api.Models
                 }
             }
         }
-        ////
-        public void PatchTodoItem(int listId, int taskId, TodoItem task)
+        public void  PatchTodoItem(int taskId, TodoItem task)
         {
-            var editableTask = GetTask(listId, taskId);
+            var editableTask = GetTask(taskId);
 
             editableTask.Title = task?.Title;
             editableTask.DueDate = task?.DueDate;
@@ -109,11 +111,12 @@ namespace todo_rest_api.Models
             editableTask.Done = task?.Done;
         }
 
-        public void DeleteTodoItem(int listId, int id)
+        public void DeleteTodoItem(int id)
         {
-            var removeTask = GetTask(listId, id);
-
-            GetTodoRepository(listId).tasks.Remove(removeTask);
+            foreach (var repo in todoRepo)
+            {
+                repo.tasks.RemoveAll(item => item.Id == id);
+            }
         }
 
 

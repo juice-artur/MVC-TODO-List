@@ -7,7 +7,7 @@ using todo_rest_api.Models;
 
 namespace todo_rest_api.Controllers
 {
-    [Route("api/tasks/")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TodoItemController : ControllerBase
     {
@@ -26,9 +26,9 @@ namespace todo_rest_api.Controllers
 
 
         [HttpGet("{listId}/{id}")]
-        public ActionResult<TodoItem> GetTask(int listId, int id)
+        public ActionResult<TodoItem> GetTask(int id)
         {
-            return _todoItemService.GetTask(listId, id);
+            return _todoItemService.GetTask(id);
         }
 
 
@@ -51,18 +51,18 @@ namespace todo_rest_api.Controllers
 
 
         [HttpPatch("{listId}/{id}")]
-        public IActionResult PatchTask(int listId, int id, TodoItem task)
+        public IActionResult PatchTask(int id, TodoItem task)
         {
-            _todoItemService.PatchTodoItem(listId, id, task);
+            _todoItemService.PatchTodoItem(id, task);
 
             return Ok();
         }
 
 
         [HttpDelete("{listId}/{id}")]
-        public ActionResult<TodoItem> DeleteTask(int listId, int id)
+        public ActionResult<TodoItem> DeleteTask(int id)
         {
-            _todoItemService.DeleteTodoItem(listId, id);
+            _todoItemService.DeleteTodoItem(id);
 
             return Ok();
         }

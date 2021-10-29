@@ -24,7 +24,7 @@ namespace todo_rest_api.Controllers
         [HttpGet("")]
         public ActionResult<IEnumerable<RepositoryTodoItem>> GetTodoItems()
         {
-            return todoItemService.GetAllRepositori();
+            return todoItemService.GetAllRepository();
         }
 
 
@@ -38,7 +38,7 @@ namespace todo_rest_api.Controllers
         [HttpPost("")]
         public ActionResult<RepositoryTodoItem> CreateTodoList(RepositoryTodoItem todoItem)
         {
-            todoItemService.AddTodoItem(todoItem);
+            todoItemService.AddRepository(todoItem);
 
             return Created($"api/todolist/{todoItem.Id}", todoItem);
         }
@@ -47,7 +47,7 @@ namespace todo_rest_api.Controllers
         [HttpDelete("list")]
         public ActionResult<RepositoryTodoItem> DeleteTodoItemById(int listId)
         {
-            todoItemService.Remove(listId);
+            todoItemService.RemoveRepo(listId);
 
             return Ok();
         }
@@ -60,9 +60,9 @@ namespace todo_rest_api.Controllers
 
         
         [HttpGet("task")]
-        public ActionResult<TodoItem> GetTask(int listId, int taskId)
+        public ActionResult<TodoItem> GetTask(int taskId)
         {
-            return todoItemService.GetTask(listId, taskId);
+            return todoItemService.GetTask(taskId);
         }
 
 
@@ -85,18 +85,18 @@ namespace todo_rest_api.Controllers
 
 
         [HttpPatch("task")]
-        public IActionResult PatchTask(int listId, int taskId, TodoItem task)
+        public IActionResult PatchTask(int taskId, TodoItem task)
         {
-            todoItemService.PatchTodoItem(listId, taskId, task);
+            todoItemService.PatchTodoItem(taskId, task);
 
             return Ok();
         }
 
 
         [HttpDelete("task")]
-        public ActionResult<TodoItem> DeleteTaskById(int listId, int taskId)
+        public ActionResult<TodoItem> DeleteTaskById(int taskId)
         {
-            todoItemService.DeleteTodoItem(listId, taskId);
+            todoItemService.DeleteTodoItem(taskId);
 
             return Ok();
         }

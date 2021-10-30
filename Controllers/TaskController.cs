@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Models;
@@ -25,7 +26,14 @@ namespace todo_rest_api.Controllers
         [HttpGet("{id}")]
         public ActionResult<Task> GetTask(int id)
         {
-            return _todoItemService.GetTask(id);
+            try
+            {
+                return _todoItemService.GetTask(id);
+            }
+            catch (ArgumentException e)
+            {
+                return NotFound();
+            }
         }
 
 

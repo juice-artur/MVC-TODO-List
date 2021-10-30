@@ -18,11 +18,11 @@ namespace todo_rest_api.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<List<RepositoryTasks>> GetTasks()
+        public ActionResult<List<RepositoryTasks>> GetAllRepo()
         {
             return _todoItemService.GetAllRepository();
         }
-
+        
         [HttpGet("{repoId}")]
         public ActionResult<List<Task>> GetTasksInRepo(int repoId)
         {

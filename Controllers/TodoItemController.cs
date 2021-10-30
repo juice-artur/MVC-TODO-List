@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Models;
 using Task = todo_rest_api.Models.Task;
@@ -12,6 +13,12 @@ namespace todo_rest_api.Controllers
         public TodoItemController(TasksService service)
         {
             _todoItemService = service;
+        }
+        
+        [HttpGet("")]
+        public ActionResult<List<Task>> GetTasks()
+        {
+            return _todoItemService.GetAllTasks();
         }
 
 

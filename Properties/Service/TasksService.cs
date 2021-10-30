@@ -113,6 +113,20 @@ namespace todo_rest_api.Models
             }
         }
 
+        public List<Task> GetAllTasks()
+        {
+            List<Task> tasks = new List<Task>();
+            foreach (var repo in todoRepo)
+            {
+                foreach (var task in repo.Tasks)
+                {
+                   tasks.Add(task); 
+                }
+            }
+
+            return tasks;
+        }
+
 
     }
 }

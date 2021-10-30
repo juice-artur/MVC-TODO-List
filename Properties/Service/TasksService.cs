@@ -6,22 +6,22 @@ namespace todo_rest_api.Models
 {
     public class TasksService
     {
-        private List<RepositoryTasks> todoRepo = new List<RepositoryTasks>    {
-                new RepositoryTasks() {
+        private readonly List<TaskList> _todoRepo = new List<TaskList>    {
+                new TaskList() {
                     Id = 1, Title = "First",
                     Tasks = new List<Task>()
                         {
-                           new Task() {Id = ++RepositoryTasks.LastTaskId, Title = "Task 1, List 1"},
+                           new Task() {Id = ++TaskList.LastTaskId, Title = "Task 1, List 1"},
                         }},
-                new RepositoryTasks() {
+                new TaskList() {
                     Id = 2, Title = "Second",
                     Tasks = new List<Task>()
                         {
-                           new Task() {Id =  ++RepositoryTasks.LastTaskId, Title = "Task 1, List 2"},
+                           new Task() {Id =  ++TaskList.LastTaskId, Title = "Task 1, List 2"},
                         }}
             };
         private int _lastId = 2;
-        public RepositoryTasks AddRepository(RepositoryTasks repository)
+        public TaskList AddTaskList(TaskList repository)
         {
             if (repository == null)
             {
@@ -29,34 +29,34 @@ namespace todo_rest_api.Models
             }
 
             repository.Id = ++_lastId;
-            todoRepo.Add(repository);
+            _todoRepo.Add(repository);
             return repository;
         }
 
-        public RepositoryTasks GetTodoRepository(int id)
+        public TaskList GetTodoRepository(int id)
         {
-            return todoRepo.Find(i => i.Id == id);
+            return _todoRepo.Find(i => i.Id == id);
         }
 
-        public List<RepositoryTasks> GetAllRepository()
+        public List<TaskList> GetAllTaskList()
         {
-            return todoRepo;
+            return _todoRepo;
         }
 
 
-        public List<Task> GetAllTasksInRepo(int repoId)
+        public List<Task> GetAllTasksInList(int repoId)
         {
-            return todoRepo[repoId].Tasks;
+            return _todoRepo[repoId].Tasks;
         }
-        public void RemoveRepo(int id)
+        public void RemoveTaskList(int id)
         {
-            todoRepo.RemoveAll(i => i.Id == id);
+            _todoRepo.RemoveAll(i => i.Id == id);
         }
 
 
         public Task GetTask(int id)
         {
-            foreach (var repo in todoRepo)
+            foreach (var repo in _todoRepo)
             {
                 foreach (var task in repo.Tasks)
                 {
@@ -71,16 +71,16 @@ namespace todo_rest_api.Models
 
         }
         
-        public void CreateTaskInRepository(int listId, Task task)
+        public void CreateTaskInList(int listId, Task task)
         {
             var listForAddTask = GetTodoRepository(listId);
-            task.Id = ++RepositoryTasks.LastTaskId;
+            task.Id = ++TaskList.LastTaskId;
             listForAddTask.Tasks.Add(task);
         }
 
         public void PutTodoItem(int id, Task task)
         {
-            foreach (var repo in todoRepo)
+            foreach (var repo in _todoRepo)
             {
                 for (var i = 0; i < repo.Tasks.Count;  ++i)
                 {
@@ -107,7 +107,7 @@ namespace todo_rest_api.Models
 
         public void DeleteTodoItem(int id)
         {
-            foreach (var repo in todoRepo)
+            foreach (var repo in _todoRepo)
             {
                 repo.Tasks.RemoveAll(item => item.Id == id);
             }
@@ -116,7 +116,7 @@ namespace todo_rest_api.Models
         public List<Task> GetAllTasks()
         {
             List<Task> tasks = new List<Task>();
-            foreach (var repo in todoRepo)
+            foreach (var repo in _todoRepo)
             {
                 foreach (var task in repo.Tasks)
                 {

@@ -7,10 +7,10 @@ namespace todo_rest_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListsTodoItemController: ControllerBase
+    public class TaskQueryParamController: ControllerBase
     {
         private readonly TasksService _todoItemService;
-        public ListsTodoItemController(TasksService service)
+        public TaskQueryParamController(TasksService service)
         {
             _todoItemService = service;
         }
@@ -24,7 +24,7 @@ namespace todo_rest_api.Controllers
         [HttpPost("")]
         public ActionResult<Task> PostTask(int listId, Task task)
         {
-            _todoItemService.CreateTaskInRepository(listId, task);
+            _todoItemService.CreateTaskInList(listId, task);
             return Ok();
         }
         [HttpPut("")]

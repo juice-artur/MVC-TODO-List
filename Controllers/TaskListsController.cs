@@ -7,42 +7,42 @@ namespace todo_rest_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TodoListController : ControllerBase
+    public class TaskListController : ControllerBase
     {
         private readonly TasksService _todoItemService;
 
 
-        public TodoListController(TasksService service)
+        public TaskListController(TasksService service)
         {
             this._todoItemService = service;
         }
 
         [HttpGet("")]
-        public ActionResult<List<RepositoryTasks>> GetAllRepo()
+        public ActionResult<List<TaskList>> GetAllTaskList()
         {
-            return _todoItemService.GetAllRepository();
+            return _todoItemService.GetAllTaskList();
         }
         
         [HttpGet("{repoId}")]
-        public ActionResult<List<Task>> GetTasksInRepo(int repoId)
+        public ActionResult<List<Task>> GetTasksInList(int repoId)
         {
-            return _todoItemService.GetAllTasksInRepo(repoId);
+            return _todoItemService.GetAllTasksInList(repoId);
         }
         
 
         [HttpPost]
-        public ActionResult<RepositoryTasks> CreateTodoList(RepositoryTasks tasks)
+        public ActionResult<TaskList> CreateTodoList(TaskList tasks)
         {
-            _todoItemService.AddRepository(tasks);
+            _todoItemService.AddTaskList(tasks);
 
             return Created($"api/todolist/{tasks.Id}", tasks);
         }
 
 
         [HttpDelete("{repoId}")]
-        public ActionResult<RepositoryTasks> DeleteTodoItemById(int repoId)
+        public ActionResult<TaskList> DeleteTaskList(int repoId)
         {
-            _todoItemService.RemoveRepo(repoId);
+            _todoItemService.RemoveTaskList(repoId);
 
             return Ok();
         }

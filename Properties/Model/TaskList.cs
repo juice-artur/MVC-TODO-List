@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace todo_rest_api.Models
 {
-    public  class RepositoryTasks
+    public  class TaskList
     {
 
         public int Id { get; set; }

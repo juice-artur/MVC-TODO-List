@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Models;
+using Task = todo_rest_api.Models.Task;
 
 namespace todo_rest_api.Controllers
 {
@@ -11,22 +8,22 @@ namespace todo_rest_api.Controllers
     [ApiController]
     public class TodoItemController : ControllerBase
     {
-        private readonly TodoItemListService _todoItemService;
-        public TodoItemController(TodoItemListService service)
+        private readonly TasksService _todoItemService;
+        public TodoItemController(TasksService service)
         {
             _todoItemService = service;
         }
 
 
         [HttpGet("{id}")]
-        public ActionResult<TodoItem> GetTask(int id)
+        public ActionResult<Task> GetTask(int id)
         {
             return _todoItemService.GetTask(id);
         }
 
 
         [HttpPost("{listId}")]
-        public ActionResult<TodoItem> PostTask(int listId, TodoItem task)
+        public ActionResult<Task> PostTask(int listId, Task task)
         {
             _todoItemService.CreateTaskInRepository(listId, task);
 
@@ -35,7 +32,7 @@ namespace todo_rest_api.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult PutTask(int id, TodoItem task)
+        public IActionResult PutTask(int id, Task task)
         {
            _todoItemService.PutTodoItem(id, task);
 
@@ -44,7 +41,7 @@ namespace todo_rest_api.Controllers
 
 
         [HttpPatch("{id}")]
-        public IActionResult PatchTask(int id, TodoItem task)
+        public IActionResult PatchTask(int id, Task task)
         {
             _todoItemService.PatchTodoItem(id, task);
 
@@ -53,7 +50,7 @@ namespace todo_rest_api.Controllers
 
 
         [HttpDelete("{id}")]
-        public ActionResult<TodoItem> DeleteTask(int id)
+        public ActionResult<Task> DeleteTask(int id)
         {
             _todoItemService.DeleteTodoItem(id);
 

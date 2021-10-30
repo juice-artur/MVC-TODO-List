@@ -1,10 +1,7 @@
-   
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Models;
+using Task = todo_rest_api.Models.Task;
 
 namespace todo_rest_api.Controllers
 {
@@ -12,38 +9,38 @@ namespace todo_rest_api.Controllers
     [ApiController]
     public class TodoListController : ControllerBase
     {
-        private readonly TodoItemListService _todoItemService;
+        private readonly TasksService _todoItemService;
 
 
-        public TodoListController(TodoItemListService service)
+        public TodoListController(TasksService service)
         {
             this._todoItemService = service;
         }
 
         [HttpGet("")]
-        public ActionResult<List<RepositoryTodoItem>> GetTasks()
+        public ActionResult<List<RepositoryTasks>> GetTasks()
         {
             return _todoItemService.GetAllRepository();
         }
 
         [HttpGet("{repoId}")]
-        public ActionResult<List<TodoItem>> GetTasksInRepo(int repoId)
+        public ActionResult<List<Task>> GetTasksInRepo(int repoId)
         {
             return _todoItemService.GetAllTasksInRepo(repoId);
         }
         
 
         [HttpPost]
-        public ActionResult<RepositoryTodoItem> CreateTodoList(RepositoryTodoItem todoItem)
+        public ActionResult<RepositoryTasks> CreateTodoList(RepositoryTasks tasks)
         {
-            _todoItemService.AddRepository(todoItem);
+            _todoItemService.AddRepository(tasks);
 
-            return Created($"api/todolist/{todoItem.Id}", todoItem);
+            return Created($"api/todolist/{tasks.Id}", tasks);
         }
 
 
         [HttpDelete("{repoId}")]
-        public ActionResult<RepositoryTodoItem> DeleteTodoItemById(int repoId)
+        public ActionResult<RepositoryTasks> DeleteTodoItemById(int repoId)
         {
             _todoItemService.RemoveRepo(repoId);
 

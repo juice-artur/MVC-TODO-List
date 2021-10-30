@@ -18,13 +18,6 @@ namespace todo_rest_api.Controllers
         }
 
 
-        [HttpGet("")]
-        public Dictionary<string, List<TodoItem>> GetTasks()
-        {
-            return _todoItemService.GetTasks();
-        }
-
-
         [HttpGet("{id}")]
         public ActionResult<TodoItem> GetTask(int id)
         {

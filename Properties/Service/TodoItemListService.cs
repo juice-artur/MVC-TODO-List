@@ -42,6 +42,12 @@ namespace todo_rest_api.Models
         {
             return todoRepo;
         }
+
+
+        public List<TodoItem> GetAllTasksInRepo(int repoId)
+        {
+            return todoRepo[repoId].Tasks;
+        }
         public void RemoveRepo(int id)
         {
             todoRepo.RemoveAll(i => i.Id == id);
@@ -63,27 +69,6 @@ namespace todo_rest_api.Models
 
             throw new ArgumentException ("Not find argument");
 
-        }
-        public Dictionary<string, List<TodoItem>> GetTasks()
-        {
-            Dictionary<string, List<TodoItem>> tasks = new Dictionary<string, List<TodoItem>>();
-            foreach (var todo in todoRepo)
-            {
-                foreach (var task in todo.Tasks)
-                {
-                    if(tasks.ContainsKey(todo.Title))
-                    {
-                        tasks[todo.Title].Add(task);
-                    }
-                    else
-                    {
-                        tasks.Add(todo.Title, new List<TodoItem>());
-                        tasks[todo.Title].Add(task);
-                    }
-                }
-            }
-
-            return tasks;
         }
         
         public void CreateTaskInRepository(int listId, TodoItem item)

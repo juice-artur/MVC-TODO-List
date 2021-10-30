@@ -20,20 +20,18 @@ namespace todo_rest_api.Controllers
             this._todoItemService = service;
         }
 
-
-        // [HttpGet]
-        // public ActionResult<IEnumerable<RepositoryTodoItem>> GetTodoItems()
-        // {
-        //     return _todoItemService.GetAllRepository();
-        // }
-
-
-        [HttpGet]
-        public ActionResult<RepositoryTodoItem> GetTodoListById(int listId)
+        [HttpGet("")]
+        public ActionResult<List<RepositoryTodoItem>> GetTasks()
         {
-            return _todoItemService.GetTodoRepository(listId);
+            return _todoItemService.GetAllRepository();
         }
 
+        [HttpGet("{repoId}")]
+        public ActionResult<List<TodoItem>> GetTasksInRepo(int repoId)
+        {
+            return _todoItemService.GetAllTasksInRepo(repoId);
+        }
+        
 
         [HttpPost]
         public ActionResult<RepositoryTodoItem> CreateTodoList(RepositoryTodoItem todoItem)
@@ -44,10 +42,10 @@ namespace todo_rest_api.Controllers
         }
 
 
-        [HttpDelete]
-        public ActionResult<RepositoryTodoItem> DeleteTodoItemById(int listId)
+        [HttpDelete("{repoId}")]
+        public ActionResult<RepositoryTodoItem> DeleteTodoItemById(int repoId)
         {
-            _todoItemService.RemoveRepo(listId);
+            _todoItemService.RemoveRepo(repoId);
 
             return Ok();
         }

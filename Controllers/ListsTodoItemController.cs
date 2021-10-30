@@ -7,7 +7,7 @@ using todo_rest_api.Models;
 
 namespace todo_rest_api.Controllers
 {
-    [Route("api/[controller]/{listId}/tasks")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ListsTodoItemController: ControllerBase
     {
@@ -17,12 +17,8 @@ namespace todo_rest_api.Controllers
             _todoItemService = service;
         }
         
+
         [HttpGet("")]
-        public Dictionary<string, List<TodoItem>> GetTasks()
-        {
-            return _todoItemService.GetTasks();
-        }
-        [HttpGet("{id}")]
         public ActionResult<TodoItem> GetTask(int id)
         {
             return _todoItemService.GetTask(id);
@@ -34,7 +30,7 @@ namespace todo_rest_api.Controllers
             _todoItemService.CreateTaskInRepository(listId, task);
             return Ok();
         }
-        [HttpPut("{id}")]
+        [HttpPut("")]
         public IActionResult PutTask(int id, TodoItem task)
         {
             _todoItemService.PutTodoItem(id, task);
@@ -42,7 +38,7 @@ namespace todo_rest_api.Controllers
             return Ok();
         }
         
-        [HttpPatch("{id}")]
+        [HttpPatch("")]
         public IActionResult PatchTask(int id, TodoItem task)
         {
             _todoItemService.PatchTodoItem(id, task);
@@ -51,7 +47,7 @@ namespace todo_rest_api.Controllers
         }
 
         
-        [HttpDelete("{id}")]
+        [HttpDelete("")]
         public ActionResult<TodoItem> DeleteTask(int id)
         {
             _todoItemService.DeleteTodoItem(id);

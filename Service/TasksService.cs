@@ -11,16 +11,17 @@ namespace todo_rest_api.Models
                     Id = 1, Title = "First",
                     Tasks = new List<Task>()
                         {
-                           new Task() {Id = ++TaskList.LastTaskId, Title = "Task 1, List 1"},
+                           new Task() {Id = 1, Title = "Task 1, List 1"},
                         }},
                 new TaskList() {
                     Id = 2, Title = "Second",
                     Tasks = new List<Task>()
                         {
-                           new Task() {Id =  ++TaskList.LastTaskId, Title = "Task 1, List 2"},
+                           new Task() {Id =  2, Title = "Task 1, List 2"},
                         }}
             };
-        private int _lastId = 2;
+        private int _lastListId = 2;
+        private int _lastTaskId = 2;
         public TaskList AddTaskList(TaskList repository)
         {
             if (repository == null)
@@ -28,7 +29,7 @@ namespace todo_rest_api.Models
                 throw new ArgumentNullException("item");
             }
 
-            repository.Id = ++_lastId;
+            repository.Id = ++_lastListId;
             _todoRepo.Add(repository);
             return repository;
         }
@@ -74,7 +75,7 @@ namespace todo_rest_api.Models
         public void CreateTaskInList(int listId, Task task)
         {
             var listForAddTask = GetTodoRepository(listId);
-            task.Id = ++TaskList.LastTaskId;
+            task.Id = ++_lastTaskId;
             listForAddTask.Tasks.Add(task);
         }
 
@@ -82,12 +83,15 @@ namespace todo_rest_api.Models
         {
             foreach (var repo in _todoRepo)
             {
-                for (var i = 0; i < repo.Tasks.Count;  ++i)
+                foreach (var tempTask in repo.Tasks)
                 {
-                    if (repo.Tasks[i].Id == id)
+                    if (tempTask.Id == id)
                     {
-                        repo.Tasks[i] = task;
-                        repo.Tasks[i].Id = id;
+                        tempTask.Id = id;
+                        tempTask.Description = task.Description;
+                        tempTask.Done = task.Done;
+                        tempTask.Title = task.Title;
+                        tempTask.DueDate = task.DueDate;
                         return;
                     }
                 }

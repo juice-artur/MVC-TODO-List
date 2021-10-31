@@ -8,20 +8,20 @@ namespace todo_rest_api.Service
     {
         private readonly List<TaskList> _todoRepo = new List<TaskList>    {
                 new TaskList() {
-                    Id = 1, Title = "First",
+                    Id = 0, Title = "First",
                     Tasks = new List<Task>()
                         {
-                           new Task() {Id = 1, Title = "Task 1, List 1"},
+                           new Task() {Id = 0, Title = "Task 1, List 1"},
                         }},
                 new TaskList() {
-                    Id = 2, Title = "Second",
+                    Id = 1, Title = "Second",
                     Tasks = new List<Task>()
                         {
-                           new Task() {Id =  2, Title = "Task 1, List 2"},
+                           new Task() {Id =  1, Title = "Task 1, List 2"},
                         }}
             };
-        private int _lastListId = 2;
-        private int _lastTaskId = 2;
+        private int _lastListId = 1;
+        private int _lastTaskId = 1;
         public TaskList AddTaskList(TaskList repository)
         {
             if (repository == null)
@@ -83,21 +83,17 @@ namespace todo_rest_api.Service
         {
             foreach (var repo in _todoRepo)
             {
-                foreach (var tempTask in repo.Tasks)
+                for (var i = 0; i < repo.Tasks.Count; i++)
                 {
-                    if (tempTask.Id == id)
+                    if (repo.Tasks[i].Id == id)
                     {
-                        tempTask.Id = id;
-                        tempTask.Description = task.Description;
-                        tempTask.Done = task.Done;
-                        tempTask.Title = task.Title;
-                        tempTask.DueDate = task.DueDate;
+                        repo.Tasks[i] = task;
+                        repo.Tasks[i].Id = id;
                         return;
                     }
                 }
-
-                throw new ArgumentException("Isn't args");
             }
+            throw new ArgumentException("Isn't args");
         }
         public void  PatchTodoItem(int taskId, Task task)
         {

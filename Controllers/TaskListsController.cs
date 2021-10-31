@@ -24,10 +24,10 @@ namespace todo_rest_api.Controllers
             return _todoItemService.GetAllTaskList();
         }
         
-        [HttpGet("{repoId}")]
-        public ActionResult<List<Task>> GetTasksInList(int repoId)
+        [HttpGet("{listId}")]
+        public ActionResult<List<Task>> GetTasksInList(int listId)
         {
-            return _todoItemService.GetAllTasksInList(repoId);
+            return _todoItemService.GetAllTasksInList(listId);
         }
         
 
@@ -40,10 +40,10 @@ namespace todo_rest_api.Controllers
         }
 
 
-        [HttpDelete("{repoId}")]
-        public ActionResult<TaskList> DeleteTaskList(int repoId)
+        [HttpDelete("{listId}")]
+        public ActionResult<TaskList> DeleteTaskList(int listId)
         {
-            _todoItemService.RemoveTaskList(repoId);
+            _todoItemService.RemoveTaskList(listId);
 
             return Ok();
         }

@@ -47,6 +47,13 @@ namespace todo_rest_api.Controllers
 
             return Ok();
         }
+
+        [HttpPatch("{listId}")]
+        public void PatchList(int listId, TaskList taskList)
+        {
+            _todoItemService.PatchList(listId, taskList);
+        }
+            
         //
         // [HttpGet("tasks")]
         // public ActionResult<Dictionary<string, List<TodoItem>>> GetTasks()

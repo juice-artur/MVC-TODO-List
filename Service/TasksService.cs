@@ -6,7 +6,7 @@ namespace todo_rest_api.Service
 {
     public class TasksService
     {
-        private readonly List<TaskList> _todoRepo = new List<TaskList>    {
+        private readonly List<TaskList> _mainTaskList = new List<TaskList>    {
                 new TaskList() {
                     Id = 0, Title = "First",
                     Tasks = new List<Task>()
@@ -22,42 +22,42 @@ namespace todo_rest_api.Service
             };
         private int _lastListId = 1;
         private int _lastTaskId = 1;
-        public TaskList AddTaskList(TaskList repository)
+        public TaskList AddTaskList(TaskList taskList)
         {
-            if (repository == null)
+            if (taskList == null)
             {
-                throw new ArgumentNullException(nameof(repository));
+                throw new ArgumentNullException(nameof(taskList));
             }
 
-            repository.Id = ++_lastListId;
-            _todoRepo.Add(repository);
-            return repository;
+            taskList.Id = ++_lastListId;
+            _mainTaskList.Add(taskList);
+            return taskList;
         }
 
-        public TaskList GetTodoRepository(int id)
+        public TaskList GetTaskList(int id)
         {
-            return _todoRepo.Find(i => i.Id == id);
+            return _mainTaskList.Find(i => i.Id == id);
         }
 
         public List<TaskList> GetAllTaskList()
         {
-            return _todoRepo;
+            return _mainTaskList;
         }
 
 
-        public List<Task> GetAllTasksInList(int repoId)
+        public List<Task> GetAllTasksInList(int taskListId)
         {
-            return _todoRepo[repoId].Tasks;
+            return _mainTaskList[taskListId].Tasks;
         }
         public void RemoveTaskList(int id)
         {
-            _todoRepo.RemoveAll(i => i.Id == id);
+            _mainTaskList.RemoveAll(i => i.Id == id);
         }
 
 
         public Task GetTask(int id)
         {
-            foreach (var repo in _todoRepo)
+            foreach (var repo in _mainTaskList)
             {
                 foreach (var task in repo.Tasks)
                 {
@@ -74,14 +74,14 @@ namespace todo_rest_api.Service
         
         public void CreateTaskInList(int listId, Task task)
         {
-            var listForAddTask = GetTodoRepository(listId);
+            var listForAddTask = GetTaskList(listId);
             task.Id = ++_lastTaskId;
             listForAddTask.Tasks.Add(task);
         }
 
         public void PutTodoItem(int id, Task task)
         {
-            foreach (var repo in _todoRepo)
+            foreach (var repo in _mainTaskList)
             {
                 for (var i = 0; i < repo.Tasks.Count; i++)
                 {
@@ -105,10 +105,17 @@ namespace todo_rest_api.Service
             editableTask.Description = task?.Description;
             editableTask.Done = task?.Done;
         }
+        
+        public void  PatchList(int listId, TaskList taskList)
+        {
+            _mainTaskList[listId].Id = listId;
+
+            _mainTaskList[listId].Title = taskList?.Title;
+        }
 
         public void DeleteTodoItem(int id)
         {
-            foreach (var repo in _todoRepo)
+            foreach (var repo in _mainTaskList)
             {
                 repo.Tasks.RemoveAll(item => item.Id == id);
             }
@@ -117,7 +124,7 @@ namespace todo_rest_api.Service
         public List<Task> GetAllTasks()
         {
             List<Task> tasks = new List<Task>();
-            foreach (var repo in _todoRepo)
+            foreach (var repo in _mainTaskList)
             {
                 foreach (var task in repo.Tasks)
                 {

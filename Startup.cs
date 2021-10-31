@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using todo_rest_api.Models;
+using todo_rest_api.Service;
 
 namespace todo_rest_api
 {

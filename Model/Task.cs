@@ -1,6 +1,6 @@
 using System;
 
-namespace todo_rest_api.Models
+namespace todo_rest_api.Model
 {
     public class Task
     {

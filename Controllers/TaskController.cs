@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using todo_rest_api.Models;
-using Task = todo_rest_api.Models.Task;
+using todo_rest_api.Model;
+using todo_rest_api.Service;
 
 namespace todo_rest_api.Controllers
 {
@@ -30,7 +30,7 @@ namespace todo_rest_api.Controllers
             {
                 return _todoItemService.GetTask(id);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return NotFound();
             }

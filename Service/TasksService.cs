@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using todo_rest_api.Model;
 
-namespace todo_rest_api.Models
+namespace todo_rest_api.Service
 {
     public class TasksService
     {
@@ -26,7 +26,7 @@ namespace todo_rest_api.Models
         {
             if (repository == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(repository));
             }
 
             repository.Id = ++_lastListId;
@@ -96,7 +96,7 @@ namespace todo_rest_api.Models
                     }
                 }
 
-                throw new ArgumentException("Isnt args");
+                throw new ArgumentException("Isn't args");
             }
         }
         public void  PatchTodoItem(int taskId, Task task)

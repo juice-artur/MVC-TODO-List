@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model;
@@ -12,13 +13,13 @@ namespace todo_rest_api.Controllers
     {
         private readonly TasksService _todoItemService;
 
-
+        
         public TaskListController(TasksService service)
         {
             this._todoItemService = service;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public ActionResult<List<TaskList>> GetAllTaskList()
         {
             return _todoItemService.GetAllTaskList();
@@ -30,6 +31,13 @@ namespace todo_rest_api.Controllers
             return _todoItemService.GetAllTasksInList(listId);
         }
         
+        [HttpPost ("{listId}")]
+        public ActionResult<Task> PostTask(int listId, Task task)
+        {
+            _todoItemService.CreateTaskInList(listId, task);
+
+            return Ok();
+        }
 
         [HttpPost]
         public ActionResult<TaskList> CreateTodoList(TaskList tasks)
@@ -44,7 +52,7 @@ namespace todo_rest_api.Controllers
         public ActionResult<TaskList> DeleteTaskList(int listId)
         {
             _todoItemService.RemoveTaskList(listId);
-
+            
             return Ok();
         }
 

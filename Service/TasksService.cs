@@ -99,18 +99,17 @@ namespace todo_rest_api.Service
         {
             
             var editableTask = GetTask(taskId);
-
-            editableTask.Title = task?.Title;
-            editableTask.DueDate = task?.DueDate;
-            editableTask.Description = task?.Description;
-            editableTask.Done = task?.Done;
+            editableTask.Title = task.Title == null ?  editableTask.Title : task.Title;
+            editableTask.DueDate = task.DueDate == null ?  editableTask.DueDate: task.DueDate;
+            editableTask.Description = task.Description == null ?  editableTask.Description : task.Description;
+            editableTask.Done = task.Done == null ?  editableTask.Done : task.Done;
         }
         
         public void  PatchList(int listId, TaskList taskList)
         {
             _mainTaskList[listId].Id = listId;
 
-            _mainTaskList[listId].Title = taskList?.Title;
+            _mainTaskList[listId].Title = taskList.Title == null ? _mainTaskList[listId].Title : taskList.Title;
         }
 
         public void DeleteTodoItem(int id)

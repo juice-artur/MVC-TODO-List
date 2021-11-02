@@ -16,7 +16,7 @@ namespace todo_rest_api.Controllers
             _todoItemService = service;
         }
         
-        [HttpGet("")]
+        [HttpGet]
         public ActionResult<List<Task>> GetTasks()
         {
             return _todoItemService.GetAllTasks();
@@ -35,15 +35,7 @@ namespace todo_rest_api.Controllers
                 return NotFound();
             }
         }
-
-
-        [HttpPost("{listId}")]
-        public ActionResult<Task> PostTask(int listId, Task task)
-        {
-            _todoItemService.CreateTaskInList(listId, task);
-
-            return Ok();
-        }
+        
 
 
         [HttpPut("{id}")]

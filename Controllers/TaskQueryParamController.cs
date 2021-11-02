@@ -15,7 +15,7 @@ namespace todo_rest_api.Controllers
             _todoItemService = service;
         }
         
-        [HttpGet("")]
+        [HttpGet]
         public ActionResult<Task> GetTask(int id)
         {
             try
@@ -28,13 +28,13 @@ namespace todo_rest_api.Controllers
             }
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public ActionResult<Task> PostTask(int listId, Task task)
         {
             _todoItemService.CreateTaskInList(listId, task);
             return Ok();
         }
-        [HttpPut("")]
+        [HttpPut]
         public IActionResult PutTask(int id, Task task)
         {
             _todoItemService.PutTodoItem(id, task);
@@ -42,7 +42,7 @@ namespace todo_rest_api.Controllers
             return Ok();
         }
         
-        [HttpPatch("")]
+        [HttpPatch]
         public IActionResult PatchTask(int id, Task task)
         {
             _todoItemService.PatchTodoItem(id, task);
@@ -51,7 +51,7 @@ namespace todo_rest_api.Controllers
         }
 
         
-        [HttpDelete("")]
+        [HttpDelete]
         public ActionResult<Task> DeleteTask(int id)
         {
             _todoItemService.DeleteTodoItem(id);

@@ -16,28 +16,6 @@ namespace todo_rest_api.Controllers
             _todoItemService = service;
         }
         
-        /*[HttpGet]
-        public ActionResult<List<Task>> GetTasks()
-        {
-            return _todoItemService.GetAllTasks();
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult PutTask(int id, Task task)
-        {
-           _todoItemService.PutTodoItem(id, task);
-
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public ActionResult<Task> DeleteTask(int id)
-        {
-            _todoItemService.DeleteTodoItem(id);
-
-            return Ok();
-        }
-        */
         [HttpPost]
         public IActionResult PostTask(Task task)
         {
@@ -69,6 +47,14 @@ namespace todo_rest_api.Controllers
         public IActionResult PatchTask(int id, Task task)
         {
             _todoItemService.PatchTodoItem(id, task);
+
+            return Ok();
+        }
+        
+        [HttpDelete("{id}")]
+        public ActionResult<Task> DeleteTask(int id)
+        {
+            _todoItemService.DeleteTodoItem(id);
 
             return Ok();
         }

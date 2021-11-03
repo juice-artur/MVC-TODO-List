@@ -54,19 +54,16 @@ namespace todo_rest_api.Service
                 _context.SaveChanges();   
             }
         }
-        /*
         
-        
-
         public void DeleteTodoItem(int id)
         {
-            foreach (var repo in _mainTaskList)
+            var taskToRemove = _context.Tasks.SingleOrDefault(i => i.TaskId == id);
+
+            if (taskToRemove != null)
             {
-                repo.Tasks.RemoveAll(item => item.TaskId == id);
+                _context.Tasks.Remove(taskToRemove);
+                _context.SaveChanges();
             }
         }
-        */
-
-
     }
 }

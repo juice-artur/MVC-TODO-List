@@ -19,15 +19,7 @@ namespace todo_rest_api.Service
         }
 
         /*
-        public TaskList GetTaskList(int id)
-        {
-            return _mainTaskList.Find(i => i.TaskListId == id);
-        }
 
-        public List<TaskList> GetAllTaskList()
-        {
-            return _mainTaskList;
-        }
 
 
         public List<Task> GetAllTasksInList(int taskListId)

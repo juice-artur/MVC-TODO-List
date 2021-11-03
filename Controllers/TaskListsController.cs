@@ -27,6 +27,28 @@ namespace todo_rest_api.Controllers
             return Created($"api/todolist/{tasks.TaskListId}", tasks);
         }
         
+        [HttpGet("{listId}")]
+        public ActionResult<TaskList> GetTasksListById(int listId)
+        {
+            return _taskListsService.GetTaskListById(listId);
+        }
+        
+        [HttpGet]
+        public ActionResult<List<TaskList>> GetAllTasksInList()
+        {
+            return _taskListsService.GetAllTaskLists();
+        }
+        
+        
+        [HttpDelete("{listId}")]
+        public ActionResult<TaskList> DeleteTaskList(int listId)
+        {
+            _taskListsService.RemoveTaskList(listId);
+            
+            return Ok();
+        }
+
+        
 
         /*[HttpGet]
         public ActionResult<List<TaskList>> GetAllTaskList()
@@ -34,25 +56,11 @@ namespace todo_rest_api.Controllers
             return _todoItemService.GetAllTaskList();
         }
         
-        [HttpGet("{listId}")]
-        public ActionResult<List<Task>> GetTasksInList(int listId)
-        {
-            return _todoItemService.GetAllTasksInList(listId);
-        }
-        
         [HttpPost ("{listId}")]
         public ActionResult<Task> PostTask(int listId, Task task)
         {
             _todoItemService.CreateTaskInList(listId, task);
 
-            return Ok();
-        }
-
-        [HttpDelete("{listId}")]
-        public ActionResult<TaskList> DeleteTaskList(int listId)
-        {
-            _todoItemService.RemoveTaskList(listId);
-            
             return Ok();
         }
 

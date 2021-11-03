@@ -7,7 +7,7 @@ namespace todo_rest_api.Service
 {
     public class TasksService
     {
-        private TaskListContext _context;
+        private readonly TaskListContext _context;
         public TasksService(TaskListContext context)
         {
             _context = context;

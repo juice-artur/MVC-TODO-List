@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model;
 using todo_rest_api.Service;

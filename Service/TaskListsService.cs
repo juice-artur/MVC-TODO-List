@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using todo_rest_api.Model;
 
 namespace todo_rest_api.Service
 {
     public class TaskListsService
     {
-        private TaskListContext _context;
+        private readonly TaskListContext _context;
         public TaskListsService(TaskListContext context)
         {
             _context = context;

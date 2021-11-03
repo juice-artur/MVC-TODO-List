@@ -6,37 +6,22 @@ namespace todo_rest_api.Service
 {
     public class TasksService
     {
-        private readonly List<TaskList> _mainTaskList = new List<TaskList>    {
-                new TaskList() {
-                    Id = 0, Title = "First",
-                    Tasks = new List<Task>()
-                        {
-                           new Task() {Id = 0, Title = "Task 1, List 1"},
-                        }},
-                new TaskList() {
-                    Id = 1, Title = "Second",
-                    Tasks = new List<Task>()
-                        {
-                           new Task() {Id =  1, Title = "Task 1, List 2"},
-                        }}
-            };
-        private int _lastListId = 1;
-        private int _lastTaskId = 1;
-        public TaskList AddTaskList(TaskList taskList)
+        private TaskListContext _context;
+        public TasksService(TaskListContext context)
         {
-            if (taskList == null)
-            {
-                throw new ArgumentNullException(nameof(taskList));
-            }
-
-            taskList.Id = ++_lastListId;
-            _mainTaskList.Add(taskList);
-            return taskList;
+            _context = context;
+        }
+        
+        public void AddTask(Task task)
+        {
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
         }
 
+        /*
         public TaskList GetTaskList(int id)
         {
-            return _mainTaskList.Find(i => i.Id == id);
+            return _mainTaskList.Find(i => i.TaskListId == id);
         }
 
         public List<TaskList> GetAllTaskList()
@@ -51,7 +36,7 @@ namespace todo_rest_api.Service
         }
         public void RemoveTaskList(int id)
         {
-            _mainTaskList.RemoveAll(i => i.Id == id);
+            _mainTaskList.RemoveAll(i => i.TaskListId == id);
         }
 
 
@@ -61,7 +46,7 @@ namespace todo_rest_api.Service
             {
                 foreach (var task in repo.Tasks)
                 {
-                    if (task.Id == id)
+                    if (task.TaskId == id)
                     {
                         return task;
                     }
@@ -75,7 +60,7 @@ namespace todo_rest_api.Service
         public void CreateTaskInList(int listId, Task task)
         {
             var listForAddTask = GetTaskList(listId);
-            task.Id = ++_lastTaskId;
+            task.TaskId = ++_lastTaskId;
             listForAddTask.Tasks.Add(task);
         }
 
@@ -85,10 +70,10 @@ namespace todo_rest_api.Service
             {
                 for (var i = 0; i < repo.Tasks.Count; i++)
                 {
-                    if (repo.Tasks[i].Id == id)
+                    if (repo.Tasks[i].TaskId == id)
                     {
                         repo.Tasks[i] = task;
-                        repo.Tasks[i].Id = id;
+                        repo.Tasks[i].TaskId = id;
                         return;
                     }
                 }
@@ -107,7 +92,7 @@ namespace todo_rest_api.Service
         
         public void  PatchList(int listId, TaskList taskList)
         {
-            _mainTaskList[listId].Id = listId;
+            _mainTaskList[listId].TaskListId = listId;
 
             _mainTaskList[listId].Title = taskList.Title == null ? _mainTaskList[listId].Title : taskList.Title;
         }
@@ -116,7 +101,7 @@ namespace todo_rest_api.Service
         {
             foreach (var repo in _mainTaskList)
             {
-                repo.Tasks.RemoveAll(item => item.Id == id);
+                repo.Tasks.RemoveAll(item => item.TaskId == id);
             }
         }
 
@@ -133,6 +118,7 @@ namespace todo_rest_api.Service
 
             return tasks;
         }
+        */
 
 
     }

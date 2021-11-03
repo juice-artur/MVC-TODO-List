@@ -16,7 +16,7 @@ namespace todo_rest_api.Controllers
             _todoItemService = service;
         }
         
-        [HttpGet]
+        /*[HttpGet]
         public ActionResult<List<Task>> GetTasks()
         {
             return _todoItemService.GetAllTasks();
@@ -61,6 +61,13 @@ namespace todo_rest_api.Controllers
         {
             _todoItemService.DeleteTodoItem(id);
 
+            return Ok();
+        }
+        */
+        [HttpPost]
+        public IActionResult PostTask(Task task)
+        {
+            _todoItemService.AddTask(task);
             return Ok();
         }
         

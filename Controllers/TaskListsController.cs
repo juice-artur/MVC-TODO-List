@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model;
@@ -44,7 +44,7 @@ namespace todo_rest_api.Controllers
         {
             _todoItemService.AddTaskList(tasks);
 
-            return Created($"api/todolist/{tasks.Id}", tasks);
+            return Created($"api/todolist/{tasks.TaskListId}", tasks);
         }
 
 
@@ -107,4 +107,4 @@ namespace todo_rest_api.Controllers
         // }
 
     }
-}
+}*/

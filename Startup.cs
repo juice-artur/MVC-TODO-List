@@ -34,9 +34,10 @@ namespace todo_rest_api
             );
 
             services.AddScoped<TasksService>();
-            
+            services.AddScoped<TaskListsService>();
+
             //services.AddSingleton<TasksService>();
-  
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

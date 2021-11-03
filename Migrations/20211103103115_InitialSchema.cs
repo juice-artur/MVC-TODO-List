@@ -27,7 +27,7 @@ namespace todo_rest_api.Migrations
                 {
                     task_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    list_id = table.Column<int>(type: "integer", nullable: false),
+                    task_list_id = table.Column<int>(type: "integer", nullable: false),
                     title = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
                     due_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -36,16 +36,27 @@ namespace todo_rest_api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_tasks", x => x.task_id);
+                    table.ForeignKey(
+                        name: "fk_tasks_task_lists_task_list_id",
+                        column: x => x.task_list_id,
+                        principalTable: "task_lists",
+                        principalColumn: "task_list_id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_tasks_task_list_id",
+                table: "tasks",
+                column: "task_list_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "task_lists");
+                name: "tasks");
 
             migrationBuilder.DropTable(
-                name: "tasks");
+                name: "task_lists");
         }
     }
 }

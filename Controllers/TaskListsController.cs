@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model;
@@ -11,15 +11,24 @@ namespace todo_rest_api.Controllers
     [ApiController]
     public class TaskListController : ControllerBase
     {
-        private readonly TasksService _todoItemService;
+        private readonly TaskListsService _taskListsService;
 
         
-        public TaskListController(TasksService service)
+        public TaskListController(TaskListsService taskListsService)
         {
-            this._todoItemService = service;
+            _taskListsService = taskListsService;
         }
+        
+        [HttpPost]
+        public ActionResult<TaskList> CreateTodoList(TaskList tasks)
+        {
+            _taskListsService.AddTaskList(tasks);
 
-        [HttpGet]
+            return Created($"api/todolist/{tasks.TaskListId}", tasks);
+        }
+        
+
+        /*[HttpGet]
         public ActionResult<List<TaskList>> GetAllTaskList()
         {
             return _todoItemService.GetAllTaskList();
@@ -39,15 +48,6 @@ namespace todo_rest_api.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public ActionResult<TaskList> CreateTodoList(TaskList tasks)
-        {
-            _todoItemService.AddTaskList(tasks);
-
-            return Created($"api/todolist/{tasks.TaskListId}", tasks);
-        }
-
-
         [HttpDelete("{listId}")]
         public ActionResult<TaskList> DeleteTaskList(int listId)
         {
@@ -60,7 +60,7 @@ namespace todo_rest_api.Controllers
         public void PatchList(int listId, TaskList taskList)
         {
             _todoItemService.PatchList(listId, taskList);
-        }
+        }*/
             
         //
         // [HttpGet("tasks")]
@@ -107,4 +107,4 @@ namespace todo_rest_api.Controllers
         // }
 
     }
-}*/
+}

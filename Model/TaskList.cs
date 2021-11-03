@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace todo_rest_api.Model
 {
     public  class TaskList
     {
 
+        [Key]
         public int TaskListId { get; set; }
         public string Title { get; set; }
-        public List<Task> Tasks = new List<Task>();
+        public virtual ICollection<Task> Tasks { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ using todo_rest_api;
 namespace todo_rest_api.Migrations
 {
     [DbContext(typeof(TaskListContext))]
-    [Migration("20211103091312_InitialSchema")]
+    [Migration("20211103103115_InitialSchema")]
     partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,9 +41,9 @@ namespace todo_rest_api.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("due_date");
 
-                    b.Property<int>("ListId")
+                    b.Property<int>("TaskListId")
                         .HasColumnType("integer")
-                        .HasColumnName("list_id");
+                        .HasColumnName("task_list_id");
 
                     b.Property<string>("Title")
                         .HasColumnType("text")
@@ -51,6 +51,9 @@ namespace todo_rest_api.Migrations
 
                     b.HasKey("TaskId")
                         .HasName("pk_tasks");
+
+                    b.HasIndex("TaskListId")
+                        .HasDatabaseName("ix_tasks_task_list_id");
 
                     b.ToTable("tasks");
                 });
@@ -71,6 +74,21 @@ namespace todo_rest_api.Migrations
                         .HasName("pk_task_lists");
 
                     b.ToTable("task_lists");
+                });
+
+            modelBuilder.Entity("todo_rest_api.Model.Task", b =>
+                {
+                    b.HasOne("todo_rest_api.Model.TaskList", null)
+                        .WithMany("Tasks")
+                        .HasForeignKey("TaskListId")
+                        .HasConstraintName("fk_tasks_task_lists_task_list_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("todo_rest_api.Model.TaskList", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

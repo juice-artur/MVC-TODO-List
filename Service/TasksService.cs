@@ -22,7 +22,6 @@ namespace todo_rest_api.Service
         public Task GetTask(int id)
         {
             return _context.Tasks.Find(id);
-            //throw new ArgumentException ("Not find argument");
 
         }
 

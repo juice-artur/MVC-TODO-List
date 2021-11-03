@@ -22,22 +22,6 @@ namespace todo_rest_api.Controllers
             return _todoItemService.GetAllTasks();
         }
 
-
-        [HttpGet("{id}")]
-        public ActionResult<Task> GetTask(int id)
-        {
-            try
-            {
-                return _todoItemService.GetTask(id);
-            }
-            catch (ArgumentException)
-            {
-                return NotFound();
-            }
-        }
-        
-
-
         [HttpPut("{id}")]
         public IActionResult PutTask(int id, Task task)
         {
@@ -71,5 +55,18 @@ namespace todo_rest_api.Controllers
             return Created($"api/todolist/{task.TaskId}", task);
         }
         
+        [HttpGet("{id}")]
+        public ActionResult<Task> GetTask(int id)
+        {
+            try
+            {
+                return _todoItemService.GetTask(id);
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+        }
+
     }
 }

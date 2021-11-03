@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Service;
 using Task = todo_rest_api.Model.Task;
@@ -29,9 +29,9 @@ namespace todo_rest_api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Task> PostTask(int listId, Task task)
+        public ActionResult<Task> PostTask(Task task)
         {
-            _todoItemService.CreateTaskInList(listId, task);
+            _todoItemService.AddTask(task);
             return Ok();
         }
         [HttpPut]
@@ -60,4 +60,4 @@ namespace todo_rest_api.Controllers
         }
         
     }
-}*/
+}

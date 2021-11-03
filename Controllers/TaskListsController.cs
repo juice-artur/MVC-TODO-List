@@ -20,11 +20,11 @@ namespace todo_rest_api.Controllers
         }
         
         [HttpPost]
-        public ActionResult<TaskList> CreateTodoList(TaskList tasks)
+        public ActionResult<TaskList> CreateTodoList(TaskList taskList)
         {
-            _taskListsService.AddTaskList(tasks);
+            _taskListsService.AddTaskList(taskList);
 
-            return Created($"api/todolist/{tasks.TaskListId}", tasks);
+            return Created($"api/todolist/{taskList.TaskListId}", taskList);
         }
         
         [HttpGet("{listId}")]
@@ -48,27 +48,13 @@ namespace todo_rest_api.Controllers
             return Ok();
         }
 
-        
-
-        /*[HttpGet]
-        public ActionResult<List<TaskList>> GetAllTaskList()
-        {
-            return _todoItemService.GetAllTaskList();
-        }
-        
-        [HttpPost ("{listId}")]
-        public ActionResult<Task> PostTask(int listId, Task task)
-        {
-            _todoItemService.CreateTaskInList(listId, task);
-
-            return Ok();
-        }
-
         [HttpPatch("{listId}")]
         public void PatchList(int listId, TaskList taskList)
         {
-            _todoItemService.PatchList(listId, taskList);
-        }*/
+            _taskListsService.PatchList(listId, taskList);
+        }
+        
+
             
         //
         // [HttpGet("tasks")]

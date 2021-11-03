@@ -20,18 +20,6 @@ namespace todo_rest_api.Service
 
         /*
 
-
-
-        public List<Task> GetAllTasksInList(int taskListId)
-        {
-            return _mainTaskList[taskListId].Tasks;
-        }
-        public void RemoveTaskList(int id)
-        {
-            _mainTaskList.RemoveAll(i => i.TaskListId == id);
-        }
-
-
         public Task GetTask(int id)
         {
             foreach (var repo in _mainTaskList)

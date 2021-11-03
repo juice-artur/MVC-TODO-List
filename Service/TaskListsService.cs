@@ -40,6 +40,18 @@ namespace todo_rest_api.Service
                 _context.SaveChanges();
             }
         }
+        
+        public void  PatchList(int listId, TaskList taskList)
+        {
+            
+            var taskListToUpdate = _context.TaskLists.SingleOrDefault(i => i.TaskListId == listId);
+
+            if (taskListToUpdate != null)
+            {
+                taskListToUpdate.Title = taskList.Title;
+                _context.SaveChanges();
+            }
+        }
 
     }
 }

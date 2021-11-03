@@ -19,7 +19,7 @@ namespace todo_rest_api.Service
             _context.TaskLists.Add(taskList);
             _context.SaveChanges();
         }
-        
+
         public TaskList GetTaskListById(int listId)
         {
             return _context.TaskLists.Find(listId);

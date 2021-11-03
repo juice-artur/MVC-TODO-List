@@ -27,13 +27,6 @@ namespace todo_rest_api.Service
 
         /*
         
-        public void CreateTaskInList(int listId, Task task)
-        {
-            var listForAddTask = GetTaskList(listId);
-            task.TaskId = ++_lastTaskId;
-            listForAddTask.Tasks.Add(task);
-        }
-
         public void PutTodoItem(int id, Task task)
         {
             foreach (var repo in _mainTaskList)

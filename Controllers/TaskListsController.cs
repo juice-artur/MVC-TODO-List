@@ -49,56 +49,11 @@ namespace todo_rest_api.Controllers
         }
 
         [HttpPatch("{listId}")]
-        public void PatchList(int listId, TaskList taskList)
+        public IActionResult PatchList(int listId, TaskList taskList)
         {
             _taskListsService.PatchList(listId, taskList);
+            return Ok();
         }
         
-
-            
-        //
-        // [HttpGet("tasks")]
-        // public ActionResult<Dictionary<string, List<TodoItem>>> GetTasks()
-        // {
-        //     return _todoItemService.GetTasks();
-        // }
-        
-
-
-        // [HttpPost("task")]
-        // public ActionResult<TodoItem> PostTask(int listId, TodoItem task)
-        // {
-        //     _todoItemService.CreateTaskInRepository(listId, task);
-        //
-        //     return Created($"api/task/{listId}/{task.Id}", task);
-        // }
-
-
-        // [HttpPut("task")]
-        // public IActionResult PutTask(int listId, int taskId, TodoItem task)
-        // {
-        //     _todoItemService.PutTodoItem(taskId, task);
-        //
-        //     return Ok();
-        // }
-
-        //
-        // [HttpPatch("task")]
-        // public IActionResult PatchTask(int taskId, TodoItem task)
-        // {
-        //     _todoItemService.PatchTodoItem(taskId, task);
-        //
-        //     return Ok();
-        // }
-
-
-        // [HttpDelete("task")]
-        // public ActionResult<TodoItem> DeleteTaskById(int taskId)
-        // {
-        //     _todoItemService.DeleteTodoItem(taskId);
-        //
-        //     return Ok();
-        // }
-
     }
 }

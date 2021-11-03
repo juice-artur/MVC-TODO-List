@@ -17,25 +17,16 @@ namespace todo_rest_api.Service
             _context.Tasks.Add(task);
             _context.SaveChanges();
         }
-
-        /*
-
+        
+        
         public Task GetTask(int id)
         {
-            foreach (var repo in _mainTaskList)
-            {
-                foreach (var task in repo.Tasks)
-                {
-                    if (task.TaskId == id)
-                    {
-                        return task;
-                    }
-                }
-            }
-
-            throw new ArgumentException ("Not find argument");
+            return _context.Tasks.Find(id);
+            //throw new ArgumentException ("Not find argument");
 
         }
+
+        /*
         
         public void CreateTaskInList(int listId, Task task)
         {

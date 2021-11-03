@@ -40,24 +40,23 @@ namespace todo_rest_api.Service
             }
             //throw new ArgumentException("Isn't args");
         }
-        /*
         
         public void  PatchTodoItem(int taskId, Task task)
         {
-            
-            var editableTask = GetTask(taskId);
-            editableTask.Title = task.Title == null ?  editableTask.Title : task.Title;
-            editableTask.DueDate = task.DueDate == null ?  editableTask.DueDate: task.DueDate;
-            editableTask.Description = task.Description == null ?  editableTask.Description : task.Description;
-            editableTask.Done = task.Done == null ?  editableTask.Done : task.Done;
+            var  editableTask = _context.Tasks.SingleOrDefault(i => i.TaskId == taskId);
+            if (editableTask != null)
+            {
+                editableTask.TaskListId =  task.TaskListId == null ?  editableTask.TaskListId : task.TaskListId;
+                editableTask.Title = task.Title == null ?  editableTask.Title : task.Title;
+                editableTask.DueDate = task.DueDate == null ?  editableTask.DueDate: task.DueDate;
+                editableTask.Description = task.Description == null ?  editableTask.Description : task.Description;
+                editableTask.Done = task.Done == null ?  editableTask.Done : task.Done;
+                _context.SaveChanges();   
+            }
         }
+        /*
         
-        public void  PatchList(int listId, TaskList taskList)
-        {
-            _mainTaskList[listId].TaskListId = listId;
-
-            _mainTaskList[listId].Title = taskList.Title == null ? _mainTaskList[listId].Title : taskList.Title;
-        }
+        
 
         public void DeleteTodoItem(int id)
         {
@@ -65,20 +64,6 @@ namespace todo_rest_api.Service
             {
                 repo.Tasks.RemoveAll(item => item.TaskId == id);
             }
-        }
-
-        public List<Task> GetAllTasks()
-        {
-            List<Task> tasks = new List<Task>();
-            foreach (var repo in _mainTaskList)
-            {
-                foreach (var task in repo.Tasks)
-                {
-                   tasks.Add(task); 
-                }
-            }
-
-            return tasks;
         }
         */
 

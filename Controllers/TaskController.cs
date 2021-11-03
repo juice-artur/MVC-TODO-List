@@ -67,6 +67,13 @@ namespace todo_rest_api.Controllers
                 return NotFound();
             }
         }
+        [HttpPut("{id}")]
+        public IActionResult PutTask(int id, Task task)
+        {
+            _todoItemService.PutTodoItem(id, task);
+
+            return Ok();
+        }
 
     }
 }

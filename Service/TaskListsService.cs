@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -32,13 +33,14 @@ namespace todo_rest_api.Service
         
         public void RemoveTaskList(int id)
         {
-            var taskListToremove = _context.TaskLists.SingleOrDefault(i => i.TaskListId == id);
+            var taskListToRemove = _context.TaskLists.SingleOrDefault(i => i.TaskListId == id);
 
-            if (taskListToremove != null)
+            if (taskListToRemove != null)
             {
-                _context.TaskLists.Remove(taskListToremove);
+                _context.TaskLists.Remove(taskListToRemove);
                 _context.SaveChanges();
             }
+            
         }
         
         public void  PatchList(int listId, TaskList taskList)

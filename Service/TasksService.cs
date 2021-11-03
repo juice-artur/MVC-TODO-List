@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using todo_rest_api.Model;
 
 namespace todo_rest_api.Service
@@ -24,25 +25,23 @@ namespace todo_rest_api.Service
             return _context.Tasks.Find(id);
 
         }
-
-        /*
-        
         public void PutTodoItem(int id, Task task)
         {
-            foreach (var repo in _mainTaskList)
+            var taskToPut = _context.Tasks.SingleOrDefault(i => i.TaskId == id);
+
+            if (taskToPut != null)
             {
-                for (var i = 0; i < repo.Tasks.Count; i++)
-                {
-                    if (repo.Tasks[i].TaskId == id)
-                    {
-                        repo.Tasks[i] = task;
-                        repo.Tasks[i].TaskId = id;
-                        return;
-                    }
-                }
+                taskToPut.Description = task.Description;
+                taskToPut.Title = task.Title;
+                taskToPut.DueDate = task.DueDate;
+                taskToPut.Done = task.Done;
+                taskToPut.TaskListId = task.TaskListId;
+                _context.SaveChanges();
             }
-            throw new ArgumentException("Isn't args");
+            //throw new ArgumentException("Isn't args");
         }
+        /*
+        
         public void  PatchTodoItem(int taskId, Task task)
         {
             

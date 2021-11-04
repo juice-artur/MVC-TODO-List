@@ -20,7 +20,7 @@ namespace todo_rest_api.Service
         {
             return  _context.TaskLists.Include(tl => tl.Tasks).Select(l => new TaskTodayDTO()
             {
-                TaskListId = l.TaskListId, Title = l.Title, listTitle =  l.Tasks.Single(i => i.TaskListId== l.TaskListId).Title, Description = l.Tasks.Single(i => i.TaskListId== l.TaskListId).Description, TaskId = l.Tasks.Single(i => i.TaskListId== l.TaskListId).TaskId, DueDate = l.Tasks.Single(i => i.TaskListId== l.TaskListId).DueDate, Done = l.Tasks.Single(i => i.TaskListId== l.TaskListId).Done
+                TaskListId = l.Id, Title = l.Title, listTitle =  l.Tasks.Single(i => i.TaskListId== l.Id).Title, Description = l.Tasks.Single(i => i.TaskListId== l.Id).Description, TaskId = l.Tasks.Single(i => i.TaskListId== l.Id).Id, DueDate = l.Tasks.Single(i => i.TaskListId== l.Id).DueDate, Done = l.Tasks.Single(i => i.TaskListId== l.Id).Done
             }).ToList();
         } 
     }

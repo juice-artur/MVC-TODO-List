@@ -21,10 +21,10 @@ namespace todo_rest_api.Migrations
 
             modelBuilder.Entity("todo_rest_api.Model.Task", b =>
                 {
-                    b.Property<int?>("TaskId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("task_id")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
@@ -47,7 +47,7 @@ namespace todo_rest_api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.HasKey("TaskId")
+                    b.HasKey("Id")
                         .HasName("pk_tasks");
 
                     b.HasIndex("TaskListId")
@@ -58,17 +58,17 @@ namespace todo_rest_api.Migrations
 
             modelBuilder.Entity("todo_rest_api.Model.TaskList", b =>
                 {
-                    b.Property<int>("TaskListId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("task_list_id")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Title")
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.HasKey("TaskListId")
+                    b.HasKey("Id")
                         .HasName("pk_task_lists");
 
                     b.ToTable("task_lists");

@@ -19,7 +19,7 @@ namespace todo_rest_api.Controllers
         public IActionResult PostTask(Task task)
         {
             _todoItemService.AddTask(task);
-            return Created($"api/todolist/{task.TaskId}", task);
+            return Created($"api/todolist/{task.Id}", task);
         }
         
         [HttpGet("{id}")]

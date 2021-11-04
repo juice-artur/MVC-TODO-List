@@ -30,7 +30,7 @@ namespace todo_rest_api.Service
         
         public void RemoveTaskList(int id)
         {
-            var taskListToRemove = _context.TaskLists.SingleOrDefault(i => i.TaskListId == id);
+            var taskListToRemove = _context.TaskLists.SingleOrDefault(i => i.Id == id);
 
             if (taskListToRemove != null)
             {
@@ -43,7 +43,7 @@ namespace todo_rest_api.Service
         public void  PatchList(int listId, TaskList taskList)
         {
             
-            var taskListToUpdate = _context.TaskLists.SingleOrDefault(i => i.TaskListId == listId);
+            var taskListToUpdate = _context.TaskLists.SingleOrDefault(i => i.Id == listId);
 
             if (taskListToUpdate != null)
             {

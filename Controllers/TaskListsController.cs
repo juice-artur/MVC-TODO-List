@@ -24,7 +24,7 @@ namespace todo_rest_api.Controllers
         {
             _taskListsService.AddTaskList(taskList);
 
-            return Created($"api/todolist/{taskList.TaskListId}", taskList);
+            return Created($"api/todolist/{taskList.Id}", taskList);
         }
         
         [HttpGet("{listId}")]

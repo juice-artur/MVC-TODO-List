@@ -27,7 +27,7 @@ namespace todo_rest_api.Service
         }
         public void PutTodoItem(int id, Task task)
         {
-            var taskToPut = _context.Tasks.SingleOrDefault(i => i.TaskId == id);
+            var taskToPut = _context.Tasks.SingleOrDefault(i => i.Id == id);
 
             if (taskToPut != null)
             {
@@ -43,7 +43,7 @@ namespace todo_rest_api.Service
         
         public void  PatchTodoItem(int taskId, Task task)
         {
-            var  editableTask = _context.Tasks.SingleOrDefault(i => i.TaskId == taskId);
+            var  editableTask = _context.Tasks.SingleOrDefault(i => i.Id == taskId);
             if (editableTask != null)
             {
                 editableTask.TaskListId =  task.TaskListId == null ?  editableTask.TaskListId : task.TaskListId;
@@ -57,7 +57,7 @@ namespace todo_rest_api.Service
         
         public void DeleteTodoItem(int id)
         {
-            var taskToRemove = _context.Tasks.SingleOrDefault(i => i.TaskId == id);
+            var taskToRemove = _context.Tasks.SingleOrDefault(i => i.Id == id);
 
             if (taskToRemove != null)
             {

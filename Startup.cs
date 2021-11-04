@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using todo_rest_api.Model.DTO;
 using todo_rest_api.Service;
 
 namespace todo_rest_api
@@ -35,9 +36,8 @@ namespace todo_rest_api
 
             services.AddScoped<TasksService>();
             services.AddScoped<TaskListsService>();
-
-            //services.AddSingleton<TasksService>();
-
+            services.AddScoped<DashboardService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

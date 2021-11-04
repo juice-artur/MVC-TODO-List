@@ -1,26 +1,24 @@
-/*using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using todo_rest_api.Model.DTO;
+using todo_rest_api.Service;
 
 namespace todo_rest_api.Controllers
 {
-    public class Dashboard : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class DashboardController : ControllerBase
     {
-        [Route("api/[controller]")]
-        [ApiController]
-        public class DashboardController
+        private readonly DashboardService _dashboardService;
+
+        public DashboardController(DashboardService dashboardService)
         {
-            [HttpGet]
-            public ActionResult<Task> GetTask(int id)
-            {
-                try
-                {
-                    return _todoItemService.GetTask(id);
-                }
-                catch (ArgumentException)
-                {
-                    return NotFound();
-                }
-            }
+            _dashboardService = dashboardService;
         }
-     
+
+        [HttpGet]
+        public ActionResult<int> GetCount()
+        {
+            return _dashboardService.GetTaskListDto();
+        }
     }
-}*/
+}

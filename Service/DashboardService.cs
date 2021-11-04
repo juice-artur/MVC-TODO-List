@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Npgsql;
 using todo_rest_api.Model;
 using todo_rest_api.Model.DTO;
 
@@ -18,6 +19,38 @@ namespace todo_rest_api.Service
             _context = context;
         }
 
+        public DashboardDto GetOpenTaskByListSQL()
+        {
+            string query = "SELECT task_lists.Id,task_lists.title, COUNT(tasks.done) FROM task_lists " +
+                           "LEFT JOIN tasks ON tasks.task_list_id = task_list_id " +
+                           "WHERE tasks IS Null OR tasks.done = 'false' " +
+                           "GROUP BY task_lists.Id " +
+                           "ORDER BY task_lists.Id ";
+
+            DashboardDto dd = new DashboardDto();
+            dd.TaskTodayCount = _context.Tasks
+                .Count(t => t.DueDate.Value.Date
+                    .Equals(DateTime.Today.Date) && t.Done == (false));
+            dd.listDto = new List<TaskListDTO>();
+            using var conn = new NpgsqlConnection(_context.Database.GetConnectionString());
+            conn.Open();
+            
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                using (var reader = cmd.ExecuteReader())
+                    while (reader.Read())
+                    {
+                        TaskListDTO tempObj = new TaskListDTO();
+                        tempObj.TaskListId = reader.GetInt32(0);
+                        tempObj.Title = reader.GetString(1);
+                        tempObj.Count = reader.GetInt32(2);
+                        dd.listDto.Add(tempObj);
+                    }
+            }
+            conn.Close();
+            return dd;
+        }
+
         public DashboardDto GetOpenTaskByList()
         {
             var taskForTodayCount = _context.Tasks.Count(t => t.DueDate.Value.Date.Equals(DateTime.Today.Date));
@@ -28,11 +61,7 @@ namespace todo_rest_api.Service
                 
                 .OrderBy(l => l.TaskListId).ToList();
             return new DashboardDto() {TaskTodayCount = taskForTodayCount, listDto = tempListDto};
-
-            /*var taskForTodayCount = _context.Tasks.FromSqlRaw("SELECT count(*) FROM tasks WHERE tasks.due_date BETWEEN '2021-11-03' AND '2021-11-05' GROUP BY DATE(tasks.due_date)");
-            List<Task> temp = _context.Tasks.FromSqlRaw(
-                "select task_lists.task_list_id,task_lists.title, count(tasks.done) from tasks right join task_lists on tasks.task_list_id=task_lists.task_list_id where done=false or tasks is Null group by task_lists.task_list_id").ToList();
-            return new DashboardDto() {TaskTodayCount = Convert.ToInt32(taskForTodayCount), listDto = (TaskListDTO)temp};*/
+            
         }
     }
 }

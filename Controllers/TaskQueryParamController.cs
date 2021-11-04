@@ -32,7 +32,7 @@ namespace todo_rest_api.Controllers
         public ActionResult<Task> PostTask(Task task)
         {
             _todoItemService.AddTask(task);
-            return Ok();
+            return Created($"api/todolist/{task.Id}", task);
         }
         [HttpPut]
         public IActionResult PutTask(int id, Task task)

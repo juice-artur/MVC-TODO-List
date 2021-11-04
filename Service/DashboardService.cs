@@ -23,10 +23,9 @@ namespace todo_rest_api.Service
             var tempListDto = _context.TaskLists.Include(tl => tl.Tasks)
                 .Select(l => new TaskListDTO()
                 {
-                    TaskListId = l.TaskListId, Title = l.Title, Count = l.Tasks.Where(t=> t.Done.Equals(false)).Count()})
+                    TaskListId = l.TaskListId, Title = l.Title, Count = l.Tasks.Count(t => t.Done.Equals(false))})
                 
                 .OrderBy(l => l.TaskListId).ToList();
-            Console.WriteLine(taskForTodayCount);
             return new DashboardDto() {TaskTodayCount = taskForTodayCount, listDto = tempListDto};
         }
     }

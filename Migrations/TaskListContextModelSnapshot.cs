@@ -21,7 +21,7 @@ namespace todo_rest_api.Migrations
 
             modelBuilder.Entity("todo_rest_api.Model.Task", b =>
                 {
-                    b.Property<int>("TaskId")
+                    b.Property<int?>("TaskId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("task_id")
@@ -76,12 +76,14 @@ namespace todo_rest_api.Migrations
 
             modelBuilder.Entity("todo_rest_api.Model.Task", b =>
                 {
-                    b.HasOne("todo_rest_api.Model.TaskList", null)
+                    b.HasOne("todo_rest_api.Model.TaskList", "TaskList")
                         .WithMany("Tasks")
                         .HasForeignKey("TaskListId")
                         .HasConstraintName("fk_tasks_task_lists_task_list_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("TaskList");
                 });
 
             modelBuilder.Entity("todo_rest_api.Model.TaskList", b =>

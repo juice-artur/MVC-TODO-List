@@ -20,12 +20,13 @@ namespace todo_rest_api.Service
         public DashboardDto GetOpenTaskByList()
         {
             var taskForTodayCount = _context.Tasks.Count(t => t.DueDate.Value.Date.Equals(DateTime.Today.Date));
-            var tempListDto = _context.TaskLists.Include(tl => tl.TaskListId)
+            var tempListDto = _context.TaskLists.Include(tl => tl.Tasks)
                 .Select(l => new TaskListDTO()
                 {
-                    TaskListId = l.TaskListId, Title = l.Title, Count = l.Tasks.Count(t => t.Done.Equals(false))
-                })
+                    TaskListId = l.TaskListId, Title = l.Title, Count = l.Tasks.Where(t=> t.Done.Equals(false)).Count()})
+                
                 .OrderBy(l => l.TaskListId).ToList();
+            Console.WriteLine(taskForTodayCount);
             return new DashboardDto() {TaskTodayCount = taskForTodayCount, listDto = tempListDto};
         }
     }

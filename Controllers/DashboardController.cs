@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model.DTO;
 using todo_rest_api.Service;
@@ -18,7 +19,8 @@ namespace todo_rest_api.Controllers
         [HttpGet]
         public ActionResult<DashboardDto> GetCount()
         {
-            return _dashboardService.GetOpenTaskByList();
+            var a = _dashboardService.GetOpenTaskByList();
+            return a;
         }
     }
 }

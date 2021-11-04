@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using todo_rest_api.Model;
 using todo_rest_api.Model.DTO;
 
 namespace todo_rest_api.Service
@@ -14,15 +16,17 @@ namespace todo_rest_api.Service
         {
             _context = context;
         }
-        
-        public int GetTaskListDto()
-        {
-            return (_context.Tasks.Count(t => t.DueDate >= DateTime.Today && t.DueDate <= DateTime.Today.AddDays(1)));
-        }
 
-        public List<TaskListDTO> GetAllList()
+        public DashboardDto GetOpenTaskByList()
         {
+            var taskForTodayCount = _context.Tasks.Count(t => t.DueDate.Value.Date.Equals(DateTime.Today.Date));
+            var tempListDto = _context.TaskLists.Include(tl => tl.TaskListId)
+                .Select(l => new TaskListDTO()
+                {
+                    TaskListId = l.TaskListId, Title = l.Title, Count = l.Tasks.Count(t => t.Done.Equals(false))
+                })
+                .OrderBy(l => l.TaskListId).ToList();
+            return new DashboardDto() {TaskTodayCount = taskForTodayCount, listDto = tempListDto};
         }
-        
     }
 }

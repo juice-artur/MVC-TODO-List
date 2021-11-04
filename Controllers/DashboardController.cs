@@ -16,9 +16,9 @@ namespace todo_rest_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<int> GetCount()
+        public ActionResult<DashboardDto> GetCount()
         {
-            return _dashboardService.GetTaskListDto();
+            return _dashboardService.GetOpenTaskByList();
         }
     }
 }

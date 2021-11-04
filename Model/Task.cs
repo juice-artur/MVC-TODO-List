@@ -10,5 +10,6 @@ namespace todo_rest_api.Model
         public string Description { get; set; }
         public DateTime? DueDate { get; set; }
         public bool? Done { get; set; }
+        //public TaskList TaskList { get; set; }
     }
 }

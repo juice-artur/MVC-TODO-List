@@ -54,6 +54,12 @@ namespace todo_rest_api.Controllers
             _taskListsService.PatchList(listId, taskList);
             return Ok();
         }
+        [HttpGet("{listId}/tasks")]
+        public List<Task> GetTaskInList(int listId, bool isOpen)
+        {
+            return _taskListsService.GetTaskInList(listId,isOpen);
+        }
+        
         
     }
 }

@@ -52,5 +52,16 @@ namespace todo_rest_api.Service
             }
         }
 
+        public List<Task> GetTaskInList(int listId, bool isOpen)
+        {
+            if (!isOpen)
+            {
+                return _context.Tasks.Where(t => t.TaskListId == listId).ToList();
+            }
+            else
+            {
+                return _context.Tasks.Where(t => t.TaskListId == listId).Where(t=>t.Done == false).ToList();
+            }
+        }
     }
 }

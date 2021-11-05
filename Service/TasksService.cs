@@ -17,17 +17,18 @@ namespace todo_rest_api.Service
         
         public Task AddTask(TaskPostDto task)
         {
-            _context.Tasks.Add(new Task
+            var tempTask = new Task
             {
                 TaskList = _context.TaskLists.Single(i => i.Id == task.List.TaskListId),
-                Description = task.Description, 
-                Done = task.Done, 
+                Description = task.Description,
+                Done = task.Done,
                 Title = task.Title,
                 DueDate = task.DueDate,
-                
-            });
+
+            };
+            _context.Tasks.Add(tempTask);
             _context.SaveChanges();
-            return _context.Tasks.ToList().LastOrDefault();
+            return tempTask;
         }
         
         

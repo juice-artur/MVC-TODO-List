@@ -15,9 +15,10 @@ namespace todo_rest_api.Service
         
         public TaskList AddTaskList( TaskListPatchDto taskList)
         {
-            _context.TaskLists.Add(new TaskList(){Title = taskList.Title});
+            var entity = new TaskList(){Title = taskList.Title};
+            _context.TaskLists.Add(entity);
             _context.SaveChanges();
-            return _context.TaskLists.ToList().LastOrDefault();
+            return entity;
         }
 
         public TaskList GetTaskListById(int listId)

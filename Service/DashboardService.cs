@@ -60,7 +60,7 @@ namespace todo_rest_api.Service
                     TaskListId = l.Id, Title = l.Title, CountOpenTasks = l.Tasks.Count(t => t.Done.Equals(false))})
                 
                 .OrderBy(l => l.TaskListId).ToList();
-            return new DashboardDto() {TaskTodayCount = taskForTodayCount, ListDto = tempListDto};
+            return new DashboardDto() {TaskTodayCount = taskForTodayCount, Lists = tempListDto};
             
         }
     }

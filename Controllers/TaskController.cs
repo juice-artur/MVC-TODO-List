@@ -29,7 +29,7 @@ namespace todo_rest_api.Controllers
         {
             try
             {
-                return (TaskDto)_todoItemService.GetTask(id);
+                return TaskDto.ToTaskDto(_todoItemService.GetTask(id));
             }
             catch (ArgumentException)
             {

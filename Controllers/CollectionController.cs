@@ -21,7 +21,7 @@ namespace todo_rest_api.Controllers
         [HttpGet("today")]
         public IEnumerable<TaskDto> GetTask()
         {
-            return _service.GetTasksForToday().Select(t=>(TaskDto)t);
+            return _service.GetTasksForToday().Select(TaskDto.ToTaskDto);
         }
     }
 }

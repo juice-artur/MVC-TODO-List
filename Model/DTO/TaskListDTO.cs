@@ -7,7 +7,7 @@ namespace todo_rest_api.Model.DTO
         public int TaskListId { get; set; }
         public string Title { get; set; }
         public int CountOpenTasks { get; set; }
-
+        
     }
     
 }

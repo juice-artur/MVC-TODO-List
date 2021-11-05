@@ -31,7 +31,7 @@ namespace todo_rest_api.Service
             dd.TaskTodayCount = _context.Tasks
                 .Count(t => t.DueDate.Value.Date
                     .Equals(DateTime.Today.Date) && t.Done == (false));
-            dd.listDto = new List<TaskListDTO>();
+            dd.listDto = new List<TaskListDto>();
             using var conn = new NpgsqlConnection(_context.Database.GetConnectionString());
             conn.Open();
             
@@ -40,7 +40,7 @@ namespace todo_rest_api.Service
                 using (var reader = cmd.ExecuteReader())
                     while (reader.Read())
                     {
-                        TaskListDTO tempObj = new TaskListDTO();
+                        TaskListDto tempObj = new TaskListDto();
                         tempObj.TaskListId = reader.GetInt32(0);
                         tempObj.Title = reader.GetString(1);
                         tempObj.Count = reader.GetInt32(2);
@@ -55,7 +55,7 @@ namespace todo_rest_api.Service
         {
             var taskForTodayCount = _context.Tasks.Count(t => t.DueDate.Value.Date.Equals(DateTime.Today.Date));
             var tempListDto = _context.TaskLists.Include(tl => tl.Tasks)
-                .Select(l => new TaskListDTO()
+                .Select(l => new TaskListDto()
                 {
                     TaskListId = l.Id, Title = l.Title, Count = l.Tasks.Count(t => t.Done.Equals(false))})
                 

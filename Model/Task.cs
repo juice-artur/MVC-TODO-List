@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using todo_rest_api.Model.DTO;
 
 
 namespace todo_rest_api.Model
@@ -14,5 +15,17 @@ namespace todo_rest_api.Model
         public DateTime? DueDate { get; set; }
         public bool? Done { get; set; }
         public TaskList TaskList { get; set; }
+        
+        public static  TaskTodayDto ToEntity(Task task)
+        {
+            return new TaskTodayDto()
+            {
+                listTitle = task.TaskList.Title, 
+                Description = task.Description, 
+                Done = task.Done, Title = task.Title,
+                DueDate = task.DueDate, TaskId = task.Id, 
+                TaskListId = task.TaskListId
+            };
+        }
     }
 }

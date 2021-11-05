@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using todo_rest_api.Model;
 using todo_rest_api.Model.DTO;
 using todo_rest_api.Service;
 
@@ -17,9 +19,9 @@ namespace todo_rest_api.Controllers
         }
 
         [HttpGet("today")]
-        public List<TaskTodayDTO> GetTask()
+        public IEnumerable<TaskTodayDto> GetTask()
         {
-            return _service.GetTasksForToday();
+            return _service.GetTasksForToday().Select(Task.ToEntity);
         }
     }
 }

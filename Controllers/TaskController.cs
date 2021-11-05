@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model;
+using todo_rest_api.Model.DTO;
 using todo_rest_api.Service;
 
 namespace todo_rest_api.Controllers
@@ -24,11 +25,11 @@ namespace todo_rest_api.Controllers
         }
         
         [HttpGet("{id}")]
-        public ActionResult<Task> GetTask(int id)
+        public ActionResult<TaskDto> GetTask(int id)
         {
             try
             {
-                return _todoItemService.GetTask(id);
+                return (TaskDto)_todoItemService.GetTask(id);
             }
             catch (ArgumentException)
             {

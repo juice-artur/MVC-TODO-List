@@ -1,7 +1,9 @@
+
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using todo_rest_api.Model;
+using todo_rest_api.Model.DTO;
 
 namespace todo_rest_api.Service
 {
@@ -22,8 +24,7 @@ namespace todo_rest_api.Service
         
         public Task GetTask(int id)
         {
-            return _context.Tasks.Find(id);
-
+            return _context.Tasks.Include(tl => tl.TaskList).SingleOrDefault(t => t.Id.Equals(id));
         }
         public void PutTodoItem(int id, Task task)
         {

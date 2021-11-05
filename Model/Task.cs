@@ -16,7 +16,17 @@ namespace todo_rest_api.Model
         public bool? Done { get; set; }
         public TaskList TaskList { get; set; }
         
-        public static  TaskDto ToEntity(Task task)
+        public static explicit operator TaskDto(Task task)
+        {
+            return new TaskDto()
+            {
+                List = new TaskListDtoWithoutList{ TaskListId = task.TaskListId, Title = task.TaskList.Title},
+                Description = task.Description, 
+                Done = task.Done, Title = task.Title,
+                DueDate = task.DueDate, TaskId = task.Id
+            };
+        }
+        /*public static implicit operator TaskDto(Task task)
         {
             return new TaskDto()
             {
@@ -25,6 +35,6 @@ namespace todo_rest_api.Model
                 Done = task.Done, Title = task.Title,
                 DueDate = task.DueDate, TaskId = task.Id
             };
-        }
+        }*/
     }
 }

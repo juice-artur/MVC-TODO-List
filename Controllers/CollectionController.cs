@@ -19,7 +19,7 @@ namespace todo_rest_api.Controllers
         }
 
         [HttpGet("today")]
-        public IEnumerable<TaskTodayDto> GetTask()
+        public IEnumerable<TaskDto> GetTask()
         {
             return _service.GetTasksForToday().Select(Task.ToEntity);
         }

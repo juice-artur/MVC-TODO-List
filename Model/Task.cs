@@ -16,15 +16,14 @@ namespace todo_rest_api.Model
         public bool? Done { get; set; }
         public TaskList TaskList { get; set; }
         
-        public static  TaskTodayDto ToEntity(Task task)
+        public static  TaskDto ToEntity(Task task)
         {
-            return new TaskTodayDto()
+            return new TaskDto()
             {
-                listTitle = task.TaskList.Title, 
+                List = new TaskListDtoWithoutList(){ TaskListId = task.TaskListId, Title = task.TaskList.Title},
                 Description = task.Description, 
                 Done = task.Done, Title = task.Title,
-                DueDate = task.DueDate, TaskId = task.Id, 
-                TaskListId = task.TaskListId
+                DueDate = task.DueDate, TaskId = task.Id
             };
         }
     }

@@ -19,7 +19,7 @@ namespace todo_rest_api.Service
             _context = context;
         }
 
-        public DashboardDto GetOpenTaskByListSQL()
+        /*public DashboardDto GetOpenTaskByListSQL()
         {
             string query = "SELECT task_lists.Id,task_lists.title, COUNT(tasks.done) FROM task_lists " +
                            "LEFT JOIN tasks ON tasks.task_list_id = task_list_id " +
@@ -49,7 +49,7 @@ namespace todo_rest_api.Service
             }
             conn.Close();
             return dd;
-        }
+        }*/
 
         public DashboardDto GetOpenTaskByList()
         {
@@ -57,10 +57,10 @@ namespace todo_rest_api.Service
             var tempListDto = _context.TaskLists.Include(tl => tl.Tasks)
                 .Select(l => new TaskListDto()
                 {
-                    TaskListId = l.Id, Title = l.Title, Count = l.Tasks.Count(t => t.Done.Equals(false))})
+                    TaskListId = l.Id, Title = l.Title, CountOpenTasks = l.Tasks.Count(t => t.Done.Equals(false))})
                 
                 .OrderBy(l => l.TaskListId).ToList();
-            return new DashboardDto() {TaskTodayCount = taskForTodayCount, listDto = tempListDto};
+            return new DashboardDto() {TaskTodayCount = taskForTodayCount, ListDto = tempListDto};
             
         }
     }

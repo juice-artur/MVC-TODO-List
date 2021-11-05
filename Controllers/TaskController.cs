@@ -17,11 +17,11 @@ namespace todo_rest_api.Controllers
         }
         
         [HttpPost]
-        public IActionResult PostTask(Task task)
+        public IActionResult PostTask(TaskPostDto task)
         {
-            _todoItemService.AddTask(task);
+            Task t = _todoItemService.AddTask(task);
             
-            return Created($"api/todolist/{task.Id}", task);
+            return Created($"api/todolist/{t.Id}", t);
         }
         
         [HttpGet("{id}")]
@@ -37,7 +37,7 @@ namespace todo_rest_api.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult PutTask(int id, Task task)
+        public IActionResult PutTask(int id, TaskPostDto task)
         {
             _todoItemService.PutTodoItem(id, task);
 
@@ -45,7 +45,7 @@ namespace todo_rest_api.Controllers
         }
         
         [HttpPatch("{id}")]
-        public IActionResult PatchTask(int id, Task task)
+        public IActionResult PatchTask(int id, TaskPostDto task)
         {
             _todoItemService.PatchTodoItem(id, task);
 

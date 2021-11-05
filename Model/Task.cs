@@ -14,6 +14,7 @@ namespace todo_rest_api.Model
         public string Description { get; set; }
         public DateTime? DueDate { get; set; }
         public bool? Done { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
         public TaskList TaskList { get; set; }
         
         public static explicit operator TaskDto(Task task)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model;
+using todo_rest_api.Model.DTO;
 using todo_rest_api.Service;
 using Task = todo_rest_api.Model.Task;
 
@@ -20,11 +21,11 @@ namespace todo_rest_api.Controllers
         }
         
         [HttpPost]
-        public ActionResult<TaskList> CreateTodoList(TaskList taskList)
+        public ActionResult<TaskList> CreateTodoList(TaskListPatchDto taskList)
         {
-            _taskListsService.AddTaskList(taskList);
+            TaskList t = _taskListsService.AddTaskList(taskList);
 
-            return Created($"api/todolist/{taskList.Id}", taskList);
+            return Created($"api/todolist/{t.Id}", t);
         }
         
         [HttpGet("{listId}")]
@@ -49,7 +50,7 @@ namespace todo_rest_api.Controllers
         }
 
         [HttpPatch("{listId}")]
-        public IActionResult PatchList(int listId, TaskList taskList)
+        public IActionResult PatchList(int listId, TaskListPatchDto taskList)
         {
             _taskListsService.PatchList(listId, taskList);
             return Ok();

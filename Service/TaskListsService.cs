@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using todo_rest_api.Model;
+using todo_rest_api.Model.DTO;
 
 namespace todo_rest_api.Service
 {
@@ -12,10 +13,11 @@ namespace todo_rest_api.Service
             _context = context;
         }
         
-        public void AddTaskList(TaskList taskList)
+        public TaskList AddTaskList( TaskListPatchDto taskList)
         {
-            _context.TaskLists.Add(taskList);
+            _context.TaskLists.Add(new TaskList(){Title = taskList.Title});
             _context.SaveChanges();
+            return _context.TaskLists.ToList().LastOrDefault();
         }
 
         public TaskList GetTaskListById(int listId)
@@ -40,7 +42,7 @@ namespace todo_rest_api.Service
             
         }
         
-        public void  PatchList(int listId, TaskList taskList)
+        public void  PatchList(int listId, TaskListPatchDto taskList)
         {
             
             var taskListToUpdate = _context.TaskLists.SingleOrDefault(i => i.Id == listId);

@@ -20,6 +20,6 @@ namespace todo_rest_api.Model.DTO
                 DueDate = task.DueDate, TaskId = task.Id
             };
         }
-        
+
     }
 }

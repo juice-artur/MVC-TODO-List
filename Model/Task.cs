@@ -16,16 +16,5 @@ namespace todo_rest_api.Model
         public bool? Done { get; set; }
         [System.Text.Json.Serialization.JsonIgnore]
         public TaskList TaskList { get; set; }
-
-        /*public static implicit operator TaskDto(Task task)
-        {
-            return new TaskDto()
-            {
-                List = new TaskListDtoWithoutList(){ TaskListId = task.TaskListId, Title = task.TaskList.Title},
-                Description = task.Description, 
-                Done = task.Done, Title = task.Title,
-                DueDate = task.DueDate, TaskId = task.Id
-            };
-        }*/
     }
 }

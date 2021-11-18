@@ -30,6 +30,23 @@ namespace todo_rest_api.Service
             _context.SaveChanges();
             return tempTask;
         }
+
+
+        public Task AddServerTask(TaskServerPostDto task)
+        {
+            var tempTask = new Task
+            {
+                TaskList = _context.TaskLists.Single(i => i.Id == task.TaskListId),
+                Description = task.Description,
+                Done = task.Done,
+                Title = task.Title,
+                DueDate = task.DueDate,
+
+            };
+            _context.Tasks.Add(tempTask);
+            _context.SaveChanges();
+            return tempTask;
+        }
         
         
         public Task GetTask(int id)

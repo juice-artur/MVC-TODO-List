@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using todo_rest_api.Model;
 using todo_rest_api.Model.DTO;
@@ -27,7 +28,7 @@ namespace todo_rest_api.Controllers
 
             return Created($"api/todolist/{t.Id}", t);
         }
-        
+
         [HttpGet("{listId}")]
         public ActionResult<TaskList> GetTasksListById(int listId)
         {

@@ -71,9 +71,7 @@ namespace todo_rest_api.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Task> DeleteTask(int id)
         {
-            Console.WriteLine("i a, here" + "\n\n\n\n\n\n\n\n");
             _todoItemService.DeleteTodoItem(id);
-
             return Ok();
         }
 

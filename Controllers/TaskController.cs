@@ -61,7 +61,7 @@ namespace todo_rest_api.Controllers
         }
         
         [HttpPatch("{id}")]
-        public IActionResult PatchTask(int id, TaskPostDto task)
+        public IActionResult PatchTask(int id, TaskServerPostDto task)
         {
             _todoItemService.PatchTodoItem(id, task);
 
@@ -71,6 +71,7 @@ namespace todo_rest_api.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Task> DeleteTask(int id)
         {
+            Console.WriteLine("i a, here" + "\n\n\n\n\n\n\n\n");
             _todoItemService.DeleteTodoItem(id);
 
             return Ok();

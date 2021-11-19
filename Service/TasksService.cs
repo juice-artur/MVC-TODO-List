@@ -67,12 +67,12 @@ namespace todo_rest_api.Service
             //throw new ArgumentException("Isn't args");
         }
         
-        public void  PatchTodoItem(int taskId, TaskPostDto task)
+        public void  PatchTodoItem(int taskId, TaskServerPostDto task)
         {
             var  editableTask = _context.Tasks.SingleOrDefault(i => i.Id == taskId);
             if (editableTask != null)
             {
-                editableTask.TaskListId =  task.List.TaskListId == null ?  editableTask.TaskListId : task.List.TaskListId;
+                editableTask.TaskListId =  task.TaskListId == null ?  editableTask.TaskListId : task.TaskListId;
                 editableTask.Title = task.Title == null ?  editableTask.Title : task.Title;
                 editableTask.DueDate = task.DueDate == null ?  editableTask.DueDate: task.DueDate;
                 editableTask.Description = task.Description == null ?  editableTask.Description : task.Description;

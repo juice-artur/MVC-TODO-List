@@ -61,6 +61,12 @@ namespace todo_rest_api.Controllers
         {
             return _taskListsService.GetTaskInList(listId,isOpen);
         }
+
+        [HttpGet("{listId}/all-tasks")]
+        public List<Task> GetAllTaskInList(int listId)
+        {
+            return _taskListsService.GetTaskInList(listId,false);
+        }
         
         
     }

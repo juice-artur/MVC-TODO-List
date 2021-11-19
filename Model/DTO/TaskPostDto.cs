@@ -9,6 +9,8 @@ namespace todo_rest_api.Model.DTO
         public string Description { get; set; }
         public DateTime? DueDate { get; set; }
         public bool? Done { get; set; }
+
+        
         
     }
 }

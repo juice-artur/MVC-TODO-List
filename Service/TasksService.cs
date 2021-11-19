@@ -1,5 +1,3 @@
-
-using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using todo_rest_api.Model;

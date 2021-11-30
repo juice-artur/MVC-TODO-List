@@ -10,7 +10,7 @@ using todo_rest_api;
 namespace todo_rest_api.Migrations
 {
     [DbContext(typeof(TaskListContext))]
-    [Migration("20211119090551_InitialSchema")]
+    [Migration("20211126120336_InitialSchema")]
     partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

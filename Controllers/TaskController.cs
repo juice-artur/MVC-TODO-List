@@ -16,17 +16,8 @@ namespace todo_rest_api.Controllers
             _todoItemService = service;
         }
         
-/*        [HttpPost]
-        public IActionResult PostTask(TaskPostDto task)
-        {
-            Task t = _todoItemService.AddTask(task);
-            
-            return Created($"api/todolist/{t.Id}", t);
-        }*/
 
-
-
-
+        
         [HttpPost]
         public IActionResult PostTask(TaskServerPostDto task)
         {

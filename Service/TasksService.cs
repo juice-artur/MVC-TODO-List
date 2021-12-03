@@ -64,9 +64,7 @@ namespace todo_rest_api.Service
                 taskToPut.TaskListId = task.List.TaskListId;
                 _context.SaveChanges();
             }
-
             return taskToPut;
-            //throw new ArgumentException("Isn't args");
         }
         
         public TaskServerPostDto  PatchTodoItem(int taskId, TaskServerPostDto task)

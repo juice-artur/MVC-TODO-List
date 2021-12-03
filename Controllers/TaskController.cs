@@ -61,11 +61,9 @@ namespace todo_rest_api.Controllers
         }
         
         [HttpPatch("{id}")]
-        public IActionResult PatchTask(int id, TaskServerPostDto task)
+        public ActionResult<TaskServerPostDto> PatchTask(int id, TaskServerPostDto task)
         {
-            _todoItemService.PatchTodoItem(id, task);
-
-            return Ok();
+            return Ok(_todoItemService.PatchTodoItem(id, task));
         }
         
         [HttpDelete("{id}")]

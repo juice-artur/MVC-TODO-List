@@ -51,7 +51,7 @@ namespace todo_rest_api.Service
         {
             return _context.Tasks.Include(tl => tl.TaskList).SingleOrDefault(t => t.Id.Equals(id));
         }
-        public void PutTodoItem(int id, TaskPostDto task)
+        public Task PutTodoItem(int id, TaskPostDto task)
         {
             var taskToPut = _context.Tasks.SingleOrDefault(i => i.Id == id);
 
@@ -64,10 +64,12 @@ namespace todo_rest_api.Service
                 taskToPut.TaskListId = task.List.TaskListId;
                 _context.SaveChanges();
             }
+
+            return taskToPut;
             //throw new ArgumentException("Isn't args");
         }
         
-        public void  PatchTodoItem(int taskId, TaskServerPostDto task)
+        public TaskServerPostDto  PatchTodoItem(int taskId, TaskServerPostDto task)
         {
             var  editableTask = _context.Tasks.SingleOrDefault(i => i.Id == taskId);
             if (editableTask != null)
@@ -79,6 +81,8 @@ namespace todo_rest_api.Service
                 editableTask.Done = task.Done == null ?  editableTask.Done : task.Done;
                 _context.SaveChanges();   
             }
+
+            return task;
         }
         
         public void DeleteTodoItem(int id)
